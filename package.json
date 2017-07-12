@@ -1,0 +1,18 @@
+{
+  "name": "usdollar",
+  "version": "1.0.0",
+  "description": "Offers store",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "*",
+    "express": "*",
+    "express-handlebars": "*",
+    "mongoose": "*"
+  },
+  "author": "Lavy Toteza",
+  "license": "ISC"
+}
