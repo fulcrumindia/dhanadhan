@@ -62,6 +62,30 @@ app.get('/',(req,res)=>{
     res.render('index',view);
 });
 
+// contact route
+app.get('/contact',(req,res)=>{
+    var view = {
+        label:labels
+    }
+    res.render('contact',view);
+});
+
+// login route
+app.get('/login',(req,res)=>{
+    var view = {
+        label:labels
+    }
+    res.render('login',view);
+});
+
+// signup route
+app.get('/signup',(req,res)=>{
+    var view = {
+        label:labels
+    }
+    res.render('signup',view);
+});
+
 // start server
 app.listen(port, () => {
     console.log('Server running on port :'+port);

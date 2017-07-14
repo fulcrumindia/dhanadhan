@@ -7,8 +7,8 @@
 					<i class="fa fa-truck" aria-hidden="true"></i>
 				</div>
 				<div class="ftr-top-right">
-					<h4>FREE DELIVERY</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
+					<h4>EXPLORE DEALS</h4>
+					<p>Amazing offers around you and get the most of it.</p>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -17,8 +17,8 @@
 					<i class="fa fa-user" aria-hidden="true"></i>
 				</div>
 				<div class="ftr-top-right">
-					<h4>CUSTOMER CARE</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
+					<h4>CASHBACKS</h4>
+					<p>Get cashbacks </p>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -27,8 +27,8 @@
 					<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
 				</div>
 				<div class="ftr-top-right">
-					<h4>GOOD QUALITY</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus justo ac </p>
+					<h4>ENJOY</h4>
+					<p>The best deals </p>
 				</div>
 				<div class="clearfix"> </div>
 			</div>
@@ -43,20 +43,20 @@
 		<div class="col-md-6 social-icons w3-agile-icons">
 			<h4>Keep in touch</h4>
 			<ul>
-				<li><a href="#" class="fa fa-facebook icon facebook"> </a></li>
+				<li><a href="https://www.facebook.com/usdollarstoreraipur/" class="fa fa-facebook icon facebook"> </a></li>
 				<li><a href="#" class="fa fa-twitter icon twitter"> </a></li>
 				<li><a href="#" class="fa fa-google-plus icon googleplus"> </a></li>
 				<li><a href="#" class="fa fa-dribbble icon dribbble"> </a></li>
 				<li><a href="#" class="fa fa-rss icon rss"> </a></li>
 			</ul>
-			<ul class="apps">
+			{{!--<ul class="apps">
 				<li>
 					<h4>Download Our app : </h4>
 				</li>
 				<li><a href="#" class="fa fa-apple"></a></li>
 				<li><a href="#" class="fa fa-windows"></a></li>
 				<li><a href="#" class="fa fa-android"></a></li>
-			</ul>
+			</ul>--}}
 		</div>
 		<div class="col-md-6 subscribe-right">
 			<h4>Sign up for email and get 25%off!</h4>
@@ -76,33 +76,33 @@
 		<div class="footer-info w3-agileits-info">
 			<div class="col-md-4 address-left agileinfo">
 				<div class="footer-logo header-logo">
-					<h2><a href="index.html"><span>D</span>hana Dhan <i>Offers</i></a></h2>
-					<h6>Offers at your place.</h6>
+					<h2><a href="/"><span>D</span>hana Dhan <i>Offers</i></a></h2>
+					<h6>{{label.tagline}}</h6>
 				</div>
 				<ul>
-					<li><i class="fa fa-map-marker"></i> US Dollar Store, Shankar Nagar, Ripur (C.G).</li>
-					<li><i class="fa fa-mobile"></i> 7024 000 607 </li>
+					<li><i class="fa fa-map-marker"></i> {{label.fulladdress}}</li>
+					<li><i class="fa fa-mobile"></i> {{label.phone}} </li>
 					{{!--<li><i class="fa fa-phone"></i> 0771 4091806 </li>--}}
-					<li><i class="fa fa-envelope-o"></i> <a href="mailto:lavmeet7@gmail.com">lavmeet7@gmail.com</a></li>
+					<li><i class="fa fa-envelope-o"></i> <a href="mailto:{{label.email}}">{{label.email}}</a></li>
 				</ul>
 			</div>
-			<div class="col-md-8 address-right">
+			<div class="col-md-8 address-right" style="min-height: 125px;">
 				<div class="col-md-4 footer-grids">
 					<h3>Company</h3>
-					<ul>
+					{{!--<ul>
 						<li><a href="about.html">About Us</a></li>
 						{{!--<li><a href="marketplace.html">Marketplace</a></li>
-						<li><a href="values.html">Core Values</a></li>--}}
+						<li><a href="values.html">Core Values</a></li>
 						<li><a href="privacy.html">Privacy Policy</a></li>
-					</ul>
+					</ul>--}}
 				</div>
 				<div class="col-md-4 footer-grids">
 					<h3>Services</h3>
 					<ul>
-						<li><a href="contact.html">Contact Us</a></li>
+						<li><a href="contact">Contact Us</a></li>
 						{{!--<li><a href="login.html">Returns</a></li>
 						<li><a href="faq.html">FAQ</a></li>--}}
-						<li><a href="sitemap.html">Site Map</a></li>
+						{{!--<li><a href="sitemap">Site Map</a></li>--}}
 						{{!--<li><a href="login.html">Order Status</a></li>--}}
 					</ul>
 				</div>
