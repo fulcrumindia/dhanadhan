@@ -6,7 +6,7 @@ const path = require('path');
 const hbs = require('express-handlebars');
 var fs = require('fs');
 const app = express();
-const port = process.env.port || 8080;
+const port = process.env.port || 3000;
 
 // custom config
 const config = require('./config/database');
