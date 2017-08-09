@@ -2,8 +2,22 @@
 	<div class="container">
 		<h3 class="w3ls-title">DEALS OF THE DAY </h3>
 		<div class="deals-row">
+			{{#each deals}}
+			<div class="col-md-4 focus-grid">
+				<a href="{{link}}" class="wthree-btn" style="color: {{color}};">
+					<div class="focus-image"><i class="fa fa-gift"></i></div>
+
+					<h4 class="clrchg">{{store}}</h4>
+					<p style="font-size:9px;">{{storeaddress}} {{city}} {{state}}</p>
+					<hr>
+					<p>{{{offer}}}</p>
+					<small>{{instruction}}</small>
+				</a>
+			</div>
+			{{/each}}
+			{{!--
 			<div class="col-md-3 focus-grid">
-				<a href="products.html" class="wthree-btn">
+				<a href="#" class="wthree-btn">
 					<div class="focus-image"><i class="fa fa-mobile"></i></div>
 					<h4 class="clrchg">Mobiles</h4>
 				</a>
@@ -85,7 +99,7 @@
 					<div class="focus-image"><i class="fa fa-gift"></i></div>
 					<h4 class="clrchg">Gifts</h4>
 				</a>
-			</div>
+			</div>--}}
 			<div class="clearfix"> </div>
 		</div>
 	</div>

@@ -16,8 +16,8 @@
     {
         "image":"banner2.jpg",
         "alignment":"right",
-        "maintext":"Flat <span>50%</span> Discount",
-        "description":"Hot Offer Today Only",
+        "maintext":"Happiness Sale upto <span>51%</span> Off",
+        "description":"Central, City Center Raipur",
         "link":"#"
     },
     {
@@ -30,8 +30,8 @@
     {
         "image":"banner4.jpg",
         "alignment":"right",
-        "maintext":"Flat <span>50%</span> Discount",
-        "description":"Hot Offer Today Only",
+        "maintext":"Upto <span>50%</span> Discount",
+        "description":"D-mart, City 36 mall, Raipur",
         "link":"#"
     }
 ]

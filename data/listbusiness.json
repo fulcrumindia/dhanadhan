@@ -1,0 +1,93 @@
+{
+    "name": "listbusiness",
+    "header": "List your Business",
+    "title": "",
+    "description": "This information will let us know more about you." ,
+    "color": "purple",
+    "tabs": [
+        {
+            "name": "Business Profile",
+            "href": "profile",
+            "description": "Let's start with your Business Info",
+            "fields": [
+                {
+                    "layoutClass": "col-sm-4 col-sm-offset-1",
+                    "containerClass": "picture-container",
+                    "inputClass": "picture",
+                    "label": "Logo",
+                    "type": "file",
+                    "id": "logo",
+                    "name": "logo",
+                    "showicons": false,
+                    "addInfo": "Upload your Logo"
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Business Name <small>(required)</small>",
+                    "type": "text",
+                    "id": "businessName",
+                    "name": "businessName",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Tagline",
+                    "type": "text",
+                    "id": "businessTagline",
+                    "name": "businessTagline",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-12",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Business Address",
+                    "type": "textarea", "rows": 5,
+                    "id": "businessAddress",
+                    "name": "businessAddress",
+                    "showicons": true
+                }
+            ]
+        },
+        {
+            "name": "Category",
+            "href": "category",
+            "description": "Choose your Business Category",
+            "src": "categories",
+            "fields": [
+                {
+                    "layoutClass": "col-sm-3",
+                    "containerClass": "col-sm-12",
+                    "inputClass": "choice",
+                    "label": "",
+                    "type": "checkbox",
+                    "id": "category",
+                    "name": "category",
+                    "icon": "category.icon",
+                    "showicons": false,
+                    "showCatIcon": true
+                }
+            ]
+        },
+        {
+            "name": "Personal Info",
+            "href": "personal",
+            "fields":[
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Contact Name <small>(required)</small>",
+                    "type": "text",
+                    "id": "contactName",
+                    "name": "contactName",
+                    "showicons": true
+                }
+            ]
+        }
+    ]
+}

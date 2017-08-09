@@ -11,6 +11,7 @@
     "cors": "*",
     "express": "*",
     "express-handlebars": "*",
+    "handlebars-helpers": "^0.9.4",
     "mongoose": "*"
   },
   "author": "Lavy Toteza",

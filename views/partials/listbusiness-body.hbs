@@ -1,0 +1,26 @@
+<div class="{{layoutClass}}">
+    <div class="{{containerClass}}">
+        {{#if showicons}}
+        <span class="input-group-addon">
+            <i class="material-icons"></i>
+        </span>
+        {{/if}}
+        <div class="{{inputClass}}" data-toggle="wizard-checkbox">
+            <label class="control-label">{{{label}}}</label>
+            {{#switch type}}
+                {{#case "textarea"}}
+                    <textarea class="form-control" placeholder="" rows="{{rows}}" id="{{name}}" name="{{name}}"></textarea>
+                {{/case}}
+                {{#case "text" "file" "checkbox"}}
+                    <input type="{{type}}" id="{{name}}" name="{{name}}" class="form-control" value="{{value}}">
+                {{/case}}
+            {{/switch}}
+            {{#if showCatIcon}}
+                <div class="icon">
+                    <i class="fa {{catIcon}}"></i>
+                </div>
+            {{/if}}
+            <h6>{{addInfo}}</h6>
+        </div>
+    </div>
+</div>
