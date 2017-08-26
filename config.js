@@ -1,5 +1,4 @@
 var mysql      = require('mysql');
-var md5      = require('md5');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',

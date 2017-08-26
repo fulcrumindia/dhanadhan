@@ -8,6 +8,7 @@ var fs = require('fs');
 const app = express();
 const port = process.env.port || 3000;
 const session = require('express-session');
+const expressValidator = require('express-validator');
 // custom config
 //const config = require('./config/database');
 
@@ -18,6 +19,8 @@ var dealController=require('./controllers/deal-controller');
 // body parse middleware
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
+app.use(bodyParser({uploadDir:'/profileImages'}));
+app.use(expressValidator()); // Add this after the bodyParser middlewares!
 app.use(session({secret: 'Lbim2201'}));
 var sess;
 // default data
@@ -32,6 +35,8 @@ const Deals = require('./models/Deals');
 
 // routes
 const api = require('./routes/api');
+
+
 
 // handlebars config
 var viewsPath = path.join(__dirname,'views');
@@ -129,6 +134,7 @@ app.get('/listbusiness',(req,res)=>{
         label:labels,
         flashmessage:sess.message,
         flasherror:sess.error,
+        frmdata:sess.formData,
         wizarddata: listBusiness,
         categories: categories,
         helpers: {
@@ -156,13 +162,26 @@ app.get('/listbusiness',(req,res)=>{
                 if (!this._switch_break_) {
                     return options.fn(this);
                 }
-            }
+            },
+            equal:function (v1,  v2, msg, options) {
+                
+                        if (v1 == v2)
+                            return '<h6 class="text-danger">'+msg+'</h6>';
+                        else
+                            return '';
+                    
+                }
+            
         }
 
         
     }
+    console.log(sess.error);               
+
     sess.message='';
     sess.error='';
+    sess.formData='';
+    
     res.render('listbusiness',view);
     }
     else
