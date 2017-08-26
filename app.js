@@ -7,10 +7,19 @@ const hbs = require('express-handlebars');
 var fs = require('fs');
 const app = express();
 const port = process.env.port || 3000;
-
+const session = require('express-session');
 // custom config
-const config = require('./config/database');
+//const config = require('./config/database');
 
+var authenticateController=require('./controllers/authenticate-controller');
+var registerController=require('./controllers/register-controller');
+var dealController=require('./controllers/deal-controller');
+
+// body parse middleware
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+app.use(session({secret: 'Lbim2201'}));
+var sess;
 // default data
 const labels = require('./data/labels.json');
 const listBusiness = require('./data/listbusiness.json');
@@ -30,28 +39,17 @@ app.set('views',viewsPath);
 app.engine('hbs', hbs({extname: 'hbs', defaultLayout:'layout', layoutsDir: viewsPath+'/layouts', partialsDir: viewsPath+'/partials' }));
 app.set('view engine','hbs');
 
-// connect to mongoose db
-mongoose.connect(config.database);
-
-// on connection
-mongoose.connection.on('connected',() => {
-    console.log('Connected to database '+config.database);
-});
-
-// on error
-mongoose.connection.on('error',(err) => {
-    console.log('Database Error '+err);
-});
-
 // cors middleware
 app.use(cors());
 
-// body parse middleware
-app.use(bodyParser.json());
-
 // routes
 app.use('/api',api);
+/* route to handle login and registration */
+app.post('/listbusiness',registerController.register); // Create Seller and Business 
+app.post('/deal',dealController.createDeal); // Create Deal
 
+
+app.post('/login',authenticateController.authenticate);
 // static path
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -76,11 +74,44 @@ app.get('/contact',(req,res)=>{
 
 // login route
 app.get('/login',(req,res)=>{
-    var view = {
-        label:labels
-    }
-    res.render('login',view);
+    sess=req.session;
+    if(sess.token) {
+        /*
+        * This line check Session existence.
+        * If it existed will do some action.
+        */
+            res.redirect('/deals');
+        }
+        else {
+            var view = {
+                    label:labels,
+                    formSubmitUrl:'login',
+                    signupUrl:'listbusiness'
+                    }
+            if(sess.error)
+                {
+                    view.error=sess.error;
+                    sess.error='';
+                }
+            
+                res.render('login',view);
+            }
+    
 });
+
+// logout route
+app.get('/logout',(req,res)=>{
+    sess=req.session;    
+    sess.token='';
+    sess.userId='';
+    sess.userRole='';
+    res.redirect('/login');           
+
+});
+
+
+// deals route
+app.get('/deals',dealController.dealsList);
 
 // signup route
 app.get('/signup',(req,res)=>{
@@ -92,8 +123,12 @@ app.get('/signup',(req,res)=>{
 
 // listbusiness route
 app.get('/listbusiness',(req,res)=>{
+    sess=req.session;
+    if(!sess.token){
     var view = {
         label:labels,
+        flashmessage:sess.message,
+        flasherror:sess.error,
         wizarddata: listBusiness,
         categories: categories,
         helpers: {
@@ -123,8 +158,17 @@ app.get('/listbusiness',(req,res)=>{
                 }
             }
         }
+
+        
     }
+    sess.message='';
+    sess.error='';
     res.render('listbusiness',view);
+    }
+    else
+    {
+        res.redirect('deals');
+    }
 });
 
 // start server

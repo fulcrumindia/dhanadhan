@@ -16,8 +16,8 @@
                     "inputClass": "picture",
                     "label": "Logo",
                     "type": "file",
-                    "id": "logo",
-                    "name": "logo",
+                    "id": "businessLogo",
+                    "name": "businessLogo",
                     "showicons": false,
                     "addInfo": "Upload your Logo"
                 },
@@ -29,7 +29,8 @@
                     "type": "text",
                     "id": "businessName",
                     "name": "businessName",
-                    "showicons": true
+                    "showicons": true,
+                    "required":true
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -37,18 +38,69 @@
                     "inputClass": "form-group label-floating",
                     "label": "Tagline",
                     "type": "text",
-                    "id": "businessTagline",
-                    "name": "businessTagline",
+                    "id": "businessTagLine",
+                    "name": "businessTagLine",
                     "showicons": true
                 },
                 {
-                    "layoutClass": "col-sm-12",
+                    "layoutClass": "col-sm-6",
                     "containerClass": "input-group",
                     "inputClass": "form-group label-floating",
-                    "label": "Business Address",
+                    "label": "Business Address 1",
                     "type": "textarea", "rows": 5,
-                    "id": "businessAddress",
-                    "name": "businessAddress",
+                    "id": "businessAddress1",
+                    "name": "businessAddress1",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Business Address 2",
+                    "type": "textarea", "rows": 5,
+                    "id": "businessAddress2",
+                    "name": "businessAddress2",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "City",
+                    "type": "text", 
+                    "id": "businessCity",
+                    "name": "businessCity",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "State",
+                    "type": "text",
+                    "id": "businessState",
+                    "name": "businessState",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Have Multiple Locations?",
+                    "type": "select",
+                    "options":[{"value":"Yes"},{"value":"No"}],
+                    "id": "businessHaveMultipleLocation",
+                    "name": "businessHaveMultipleLocation",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "No of Locations",
+                    "type": "text",
+                    "id": "businessNoOfLocations",
+                    "name": "businessNoOfLocations",
                     "showicons": true
                 }
             ]
@@ -84,9 +136,73 @@
                     "label": "Contact Name <small>(required)</small>",
                     "type": "text",
                     "id": "contactName",
-                    "name": "contactName",
+                    "name": "name",
+                    "showicons": true,
+                    "required":true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Username ",
+                    "type": "text",
+                    "id": "username",
+                    "name": "username",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Email ",
+                    "type": "email",
+                    "id": "email",
+                    "name": "email",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Password <small>(required)</small>",
+                    "type": "text",
+                    "id": "password",
+                    "name": "password",
+                    "showicons": true,
+                    "required":true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Phone <small>(required)</small>",
+                    "type": "text",
+                    "id": "phone",
+                    "name": "phone",
+                    "showicons": true,
+                    "required":true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Alternative Phone ",
+                    "type": "text",
+                    "id": "alt_phone",
+                    "name": "alt_phone",
+                    "showicons": true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "input-group",
+                    "inputClass": "form-group label-floating",
+                    "label": "Agree Terms ",
+                    "type": "text",
+                    "id": "agreeTerms",
+                    "name": "agreeTerms",
                     "showicons": true
                 }
+
             ]
         }
     ]

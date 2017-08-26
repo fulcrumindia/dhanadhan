@@ -11,8 +11,15 @@
                 {{#case "textarea"}}
                     <textarea class="form-control" placeholder="" rows="{{rows}}" id="{{name}}" name="{{name}}"></textarea>
                 {{/case}}
-                {{#case "text" "file" "checkbox"}}
-                    <input type="{{type}}" id="{{name}}" name="{{name}}" class="form-control" value="{{value}}">
+                {{#case "text" "file" "checkbox" "email"}}
+                    <input type="{{type}}" id="{{name}}" {{#if required}} required="{{required}}" {{/if}} name="{{name}}" class="form-control" value="{{value}}">
+                {{/case}}
+                {{#case "select"}}
+                    <select id="{{name}}" name="{{name}}" class="form-control" onchange="javascript:if(jQuery(this).val()=='Yes') jQuery('#businessNoOfLocations').parent().show(); else jQuery('#businessNoOfLocations').parent().hide();">
+                        {{#each options}}
+                            <option value="{{value}}">{{value}}</option>
+                        {{/each}}
+                    </select>
                 {{/case}}
             {{/switch}}
             {{#if showCatIcon}}
