@@ -170,6 +170,18 @@ app.get('/listbusiness',(req,res)=>{
                         else
                             return '';
                     
+                },
+            checktype:function (v1,  v2, options) {                
+                         if(typeof v1!=undefined && v1!=undefined)
+                            {
+                                if (typeof v1 == 'object')
+                                    return "<h6 class='text-danger'>Validation error occurred</h6>";
+                                else
+                                    return "<h6 class='text-danger'>"+v1+"</h6>";
+                            }
+                          else
+                            return '';  
+                    
                 }
             
         }
