@@ -1,0 +1,113 @@
+<div class="agileits-modal modal fade" id="myModal88" tabindex="-1" role="dialog" aria-labelledby="myModal88" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="myModalLabel"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</h4>
+			</div>
+			<div class="modal-body modal-body-sub">
+				<h5>Select your delivery location </h5>
+				<select class="form-control bfh-states" data-country="US" data-state="CA">
+						<option value="">Select Your location</option>
+						<option value="Raipur">Raipur</option>
+                        <option value="Bhilai">Bhilai</option>
+                        <option value="Bilaspur">Bilaspur</option>
+                        <option value="Durg">Durg</option>
+					</select>
+				<input type="text" name="Name" placeholder="Enter your area / Landmark / Pincode" required="">
+				<button type="button" class="close2" data-dismiss="modal" aria-hidden="true">Skip & Explore</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$('#myModal88').modal('hide');
+</script>
+<!-- header -->
+<div class="header">
+	<div class="w3ls-header">
+		<!--header-one-->
+		<div class="w3ls-header-left">
+			<p><a href="{{label.headerLeftLink}}">{{label.headerLeft}}</a></p>
+		</div>
+		<div class="w3ls-header-right">
+			<ul>
+				<li class="dropdown head-dpdn">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i> My Account<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="login">Login </a></li>
+						<li><a href="signup">Sign Up</a></li>
+						{{!--<li><a href="login.html">My Orders</a></li>
+						<li><a href="login.html">Wallet</a></li>--}}
+					</ul>
+				</li>
+				<li class="dropdown head-dpdn">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-percent" aria-hidden="true"></i> Today's Deals<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="offers.html">Cash Back Offers</a></li>
+						<li><a href="offers.html">Product Discounts</a></li>
+						<li><a href="offers.html">Special Offers</a></li>
+					</ul>
+				</li>
+				{{!--<li class="dropdown head-dpdn">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gift" aria-hidden="true"></i> Gift Cards<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="offers.html">Product Gift card</a></li>
+						<li><a href="offers.html">Occasions Register</a></li>
+						<li><a href="offers.html">View Balance</a></li>
+					</ul>
+				</li>--}}
+				<li class="dropdown head-dpdn">
+					<a href="contact" class="dropdown-toggle"><i class="fa fa-map-marker" aria-hidden="true"></i> Store Finder</a>
+				</li>
+				<li class="dropdown head-dpdn">
+					<a href="listbusiness" class="dropdown-toggle"><i class="fa fa-building-o" aria-hidden="true"></i> List your Business</a>
+				</li>
+				{{!--<li class="dropdown head-dpdn">
+					<a href="card.html" class="dropdown-toggle"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Credit Card</a>
+				</li>
+				<li class="dropdown head-dpdn">
+					<a href="help" class="dropdown-toggle"><i class="fa fa-question-circle" aria-hidden="true"></i> Help</a>
+				</li>--}}
+			</ul>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+	<div class="header-two">
+		<!-- header-two -->
+		<div class="container">
+			<div class="header-logo">
+				<h1><a href="/"><span>D</span>hana Dhan <i>Offers</i></a></h1>
+				<h6>{{label.tagline}}</h6>
+			</div>
+			<div class="header-search">
+				<form action="#" method="post">
+					<input type="search" name="Search" placeholder="Search for a Product..." required="">
+					<button type="submit" class="btn btn-default" aria-label="Left Align">
+                        <i class="fa fa-search" aria-hidden="true"> </i>
+                    </button>
+				</form>
+			</div>
+			<div class="header-cart">
+				<div class="my-account">
+					<a href="contact"><i class="fa fa-map-marker" aria-hidden="true"></i> CONTACT US</a>
+				</div>
+				<div class="cart">
+					<form action="#" method="post" class="last">
+						<input type="hidden" name="cmd" value="_cart" />
+						<input type="hidden" name="display" value="1" />
+						<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
+					</form>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!-- //header-two -->
+	<div class="header-three">
+		<!-- header-three -->
+		{{>menu}}
+	</div>
+</div>
+<!-- //header -->

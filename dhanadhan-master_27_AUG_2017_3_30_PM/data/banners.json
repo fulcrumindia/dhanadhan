@@ -1,0 +1,37 @@
+[
+    {
+        "image":"amazonprime.jpg",
+        "alignment":"left",
+        "maintext":"Get ready for 30 hours of exclusive deals, launches & premieres.",
+        "description":"",
+        "link":"http://amzn.to/2tLiafC"
+    },
+    {
+        "image":"lenovosmartband.jpg",
+        "alignment":"right",
+        "maintext":"Your new fitness partner",
+        "description":"",
+        "link":"https://dl.flipkart.com/dl/lenovo-smart-band-store?affid=jogender8"
+    },
+    {
+        "image":"banner2.jpg",
+        "alignment":"right",
+        "maintext":"Happiness Sale upto <span>51%</span> Off",
+        "description":"Central, City Center Raipur",
+        "link":"#"
+    },
+    {
+        "image":"banner3.jpg",
+        "alignment":"right",
+        "maintext":"Flat <span>50%</span> Discount",
+        "description":"Hot Offer Today Only",
+        "link":"#"
+    },
+    {
+        "image":"banner4.jpg",
+        "alignment":"right",
+        "maintext":"Upto <span>50%</span> Discount",
+        "description":"D-mart, City 36 mall, Raipur",
+        "link":"#"
+    }
+]
