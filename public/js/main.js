@@ -116,7 +116,7 @@ jQuery(document).ready(function($){
 		if(jQuery(this).val()=='Yes') 
 			jQuery('#businessNoOfLocations').parent().show(); 
 		else 
-			jQuery('#businessNoOfLocations').parent().hide();
+			jQuery('#businessNoOfLocations').val(0).parent().hide();
 	});
 
 	function toggleNav(){
