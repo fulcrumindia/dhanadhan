@@ -77,7 +77,7 @@ module.exports.register=function(req,res){
             if(files.businessLogo[0].size>0){
                 var file_to_save='image_'+ randtoken.generate(16) + new Date().getFullYear() + '___profile.' + files.businessLogo[0].originalFilename;
                 var oldpath = files.businessLogo[0].path;
-                var newpath = 'C:/Users/user/Desktop/nodeimages/'+file_to_save;
+                var newpath = 'C:/Users/lavysingh/Desktop/nodeimages/'+file_to_save;
                 if (path.extname(files.businessLogo[0].path).toLowerCase() === '.png' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpeg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.gif') {
                     fs.rename(oldpath, newpath, function(err) {
                         console.log("entered2");

@@ -116,7 +116,8 @@
                     "name": "businessNoOfLocations",
                     "showicons": true,
                     "minlength":1,
-                    "maxlength":5
+                    "maxlength":5,
+                    "defaultValue":1
                 }
             ]
         },
