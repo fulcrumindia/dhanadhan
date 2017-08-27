@@ -192,7 +192,7 @@
                     "name": "phone",
                     "showicons": true,
                     "required":true,
-                    "minlength":8,
+                    "minlength":10,
                     "maxlength":10
                 },
                 {
@@ -204,7 +204,7 @@
                     "id": "alt_phone",
                     "name": "alt_phone",
                     "showicons": true,
-                    "minlength":8,
+                    "minlength":10,
                     "maxlength":10
                 },
                 {
