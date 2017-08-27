@@ -14,6 +14,7 @@ CREATE TABLE `business` (
   `businessTagLine` varchar(200) NOT NULL,
   `businessAddress1` varchar(100) NOT NULL,
   `businessAddress2` varchar(100) NOT NULL,
+  `businessCategories` varchar(500) NOT NULL,
   `businessCity` varchar(50) NOT NULL,
   `businessState` varchar(50) NOT NULL,
   `businessHaveMultipleLocation` varchar(3) NOT NULL,
@@ -67,8 +68,7 @@ CREATE TABLE `deals` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL UNIQUE KEY,
-  `email` varchar(255) NOT NULL UNIQUE KEY,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `phone` varchar(20) NOT NULL UNIQUE KEY,
   `alt_phone` varchar(20) NOT NULL,

@@ -130,11 +130,19 @@ app.get('/signup',(req,res)=>{
 app.get('/listbusiness',(req,res)=>{
     sess=req.session;
     if(!sess.token){
+        console.log(sess.message);
+        console.log("sess.selectedCategories" + sess.selectedCategories);
+        if(typeof sess.selectedCategories=='string' && sess.selectedCategories!=undefined && sess.selectedCategories!='')
+            sess.selectedCategories = sess.selectedCategories.split(',');
+        else
+            sess.selectedCategories = "";
+        console.log(sess.selectedCategories);
     var view = {
         label:labels,
         flashmessage:sess.message,
         flasherror:sess.error,
         frmdata:sess.formData,
+        selectedCategories:sess.selectedCategories,
         wizarddata: listBusiness,
         categories: categories,
         helpers: {
@@ -171,6 +179,13 @@ app.get('/listbusiness',(req,res)=>{
                             return '';
                     
                 },
+            equalality:function (v1,  v2, options) {                
+                        if (v1 == v2)
+                            return 'active';
+                        else
+                            return '';
+                    
+                },
             checktype:function (v1,  v2, options) {                
                          if(typeof v1!=undefined && v1!=undefined)
                             {
@@ -193,7 +208,7 @@ app.get('/listbusiness',(req,res)=>{
     sess.message='';
     sess.error='';
     sess.formData='';
-    
+    sess.selectedCategories = "";
     res.render('listbusiness',view);
     }
     else

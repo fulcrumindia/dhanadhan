@@ -145,16 +145,6 @@
                     "layoutClass": "col-sm-6",
                     "containerClass": "input-group",
                     "inputClass": "form-group label-floating",
-                    "label": "Username ",
-                    "type": "text",
-                    "id": "username",
-                    "name": "username",
-                    "showicons": true
-                },
-                {
-                    "layoutClass": "col-sm-6",
-                    "containerClass": "input-group",
-                    "inputClass": "form-group label-floating",
                     "label": "Email ",
                     "type": "email",
                     "id": "email",

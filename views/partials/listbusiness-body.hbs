@@ -7,7 +7,7 @@
         </span>
         {{/if}}
         
-        <div class="{{inputClass}}" data-toggle="wizard-checkbox">
+        <div class="{{inputClass}} {{#if @root.selectedCategories}} {{#each @root.selectedCategories}}{{#equalality this ../addInfo}}{{/equalality}}{{/each}}{{/if}}" data-toggle="wizard-checkbox">
             <label class="control-label">{{{label}}}</label>
             {{#switch type}}
                 {{#case "textarea"}}
@@ -25,7 +25,7 @@
                     {{/if}}
                 {{/case}}
                 {{#case "select"}}
-                    <select id="{{name}}" name="{{name}}" class="form-control" onchange="javascript:if(jQuery(this).val()=='Yes') jQuery('#businessNoOfLocations').parent().show(); else jQuery('#businessNoOfLocations').parent().hide();">
+                    <select id="{{name}}" name="{{name}}" class="form-control">
                         {{#each options}}
                             <option value="{{value}}" {{#if @root.frmdata.businessNoOfLocations}} {{#if @root.frmdata.businessNoOfLocations value}} selected="selected" {{/if}}{{/if}}>{{value}}</option>
                         {{/each}}
