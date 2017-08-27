@@ -95,7 +95,7 @@ jQuery(document).ready(function($){
 	});
 	//jQuery("#businessNoOfLocations").parent().hide();
 
-	jQuery("#phone").keypress(function(e){
+	jQuery("#phone,#alt_phone").keypress(function(e){
 		var a = [];
                 var k = e.which;
 
