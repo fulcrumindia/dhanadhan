@@ -50,50 +50,14 @@ module.exports.register=function(req,res){
     else
         var selectedCategories=req.body.selectedCategories[0];
     console.log(selectedCategories);
-    req.checkBody({
-     'businessName': {
-        optional: {
-          options: { checkFalsy: true } // or: [{ checkFalsy: true }]
-        },
-        notEmpty: {
-          errorMessage: 'Please enter business name'
-        }
-      },
-      'name': { //
-        optional: true, // won't validate if field is empty
-        isLength: {
-          options: [{ max: 50 }],
-          errorMessage: 'Name must be less than 50 chars long' // Error message for the validator, takes precedent over parameter message
-        },
-        notEmpty: true,
-        errorMessage: 'Name can not be blank'         
-      },
-      'email': {
-        optional: {
-          options: { checkFalsy: true } // or: [{ checkFalsy: true }]
-        },
-        isEmail: {
-          errorMessage: 'Please enter valid email'
-        }
-      },
-      'password': {
-        notEmpty: true,
-        errorMessage: 'Password can not be blank' // Error message for the parameter
-      },
-      'phone': { //
-        optional: true, // won't validate if field is empty
-        notEmpty: true,
-        errorMessage: 'Phone can not be blank' ,
-        isInt:{
-            errorMessage: 'Phone must be integer' 
-        },
-        isLength: {
-          options: [{ min: 10, max: 12 }],
-          errorMessage: 'Phone must be between 10 and 12 chars long' // Error message for the validator, takes precedent over parameter message
-        },
-        
-      }
-    });
+
+    req.checkBody("businessName", "Please enter business name");
+    req.checkBody("name", "Please enter name");
+    req.checkBody("email", "Please enter email").optional().isEmail().withMessage('Please enter valid email');
+    req.checkBody("password", "Please enter password");
+    req.checkBody("phone", "Please enter phone number").isLength({ min: 10,max:12 }).withMessage('Please enter valid mobile number').matches(/\d/);
+
+    
     sess.selectedCategories=selectedCategories;
     //Run the validators
     var errors = req.validationErrors();
