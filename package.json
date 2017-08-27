@@ -12,7 +12,16 @@
     "express": "*",
     "express-handlebars": "*",
     "handlebars-helpers": "^0.9.4",
-    "mongoose": "*"
+    "mongoose": "*",
+    "mysql": "*",
+    "http": "*",
+    "rand-token": "*",
+    "multiparty": "*",
+    "validator": "*",
+    "express-session": "*",
+    "express-validator": "*",
+    "path": "*",
+    "fs": "*"
   },
   "author": "Lavy Toteza",
   "license": "ISC"
