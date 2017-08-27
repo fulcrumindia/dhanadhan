@@ -1,0 +1,52 @@
+List your business
+	Business Profile
+		Logo
+		Business Name*
+		Tag line
+		Business Address1
+		Address2
+		City
+		State
+		have multiple location?
+		yes ->  no of location
+	Category
+		choose multiple (atleast 1 required)
+	Personal Info
+		Contact Name*
+		Phone*
+		Alternate no.
+		Email
+		username
+		password
+		Agree terms
+		
+Login - admin/ seller/ user
+
+Offers - CRUD
+	"category": "Home Decor",
+	"subcategory": "Household Utensils", 
+	"store": "US Dollar Store",
+	"storeaddress": "Shankar Nagar, Sec-1",
+	"city": "Raipur",
+	"state": "Chhattisgarh",
+	"offer" : "Sale on wrist watches upto 30% off",
+	"link": "#",
+	"instruction": "Visit today and be a part of biggest loyalty program",
+	"disclaimer"
+	"color": "red",
+	"display": 1,
+	"main":1,
+
+Products Listing - CRUD
+	Catgeory* [dropdown]
+	Sub category* [text]
+	ProductName*
+	Description
+	SKU
+	image upload
+	MRP*
+	Selling Price
+	Sale Price
+	display
+	main
+	
