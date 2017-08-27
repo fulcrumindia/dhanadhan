@@ -47,16 +47,70 @@ jQuery(document).ready(function($){
 		selected.parent('ul').addClass('is-hidden').parent('.has-children').parent('ul').removeClass('move-out');
 	}); 
 
+	
 	var selectedCategories=new Array;
-	$(".btn-next").click(function(){
-		$("#category .choice.active").each(function(){
+	function checkCat()
+		{
+			selectedCategories=new Array;
+			$("#category .choice.active").each(function(){
 				selectedCategories.push($(this).find('h6').text());
-			});
-		console.log(selectedCategories);
-		$("#selectedCategories").remove();
-		$("#wizardProfile form").append("<input id='selectedCategories' type='hidden' name='selectedCategories' value='"+selectedCategories+"'/>");
+				});
+				console.log(selectedCategories);
+				$("#selectedCategories").remove();
+
+				if(selectedCategories.length)
+					{
+						$("#category h6.text-danger").text("");		
+						
+						$("#wizardProfile form").append("<input id='selectedCategories' type='hidden' name='selectedCategories' value='"+selectedCategories+"'/>");
+						$("input[name='next']").attr('disabled',false);
+					}
+				else
+					{
+						$("#category h6.text-danger").text("Please select at least one category");		
+						$("input[name='next']").attr('disabled',true);				
+					}			
+		}
+
+	
+	
+	$("#category .choice").click(function(){
+		$("input[name='next']").attr('disabled',true);	
+		checkCat();
+	});
+
+
+	$(".btn-next").click(function(){
+		
+		if($("#category").hasClass('active'))
+			{
+				$(this).attr('disabled',true);				
+				checkCat();
+			}
+		else
+			{
+
+			}
+		
 	});
 	//jQuery("#businessNoOfLocations").parent().hide();
+
+	jQuery("#phone").keypress(function(e){
+		var a = [];
+                var k = e.which;
+
+                for (i = 48; i < 58; i++)
+                    a.push(i);
+
+                if (!(a.indexOf(k)>=0))
+                    e.preventDefault();
+            });
+	jQuery("#agreeTerms").change(function(){
+		if(jQuery(this).is(":checked"))
+			$("input[name='finish']").attr('disabled',false);
+		else
+			$("input[name='finish']").attr('disabled',true);
+	})
 
 	jQuery("#businessHaveMultipleLocation").change(function(){
 		if(jQuery(this).val()=='Yes') 
