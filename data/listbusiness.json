@@ -30,7 +30,9 @@
                     "id": "businessName",
                     "name": "businessName",
                     "showicons": true,
-                    "required":true
+                    "required":true,
+                    "minlength":2,
+                    "maxlength":50
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -40,7 +42,9 @@
                     "type": "text",
                     "id": "businessTagLine",
                     "name": "businessTagLine",
-                    "showicons": true
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":100
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -50,7 +54,9 @@
                     "type": "textarea", "rows": 5,
                     "id": "businessAddress1",
                     "name": "businessAddress1",
-                    "showicons": true
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":200
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -60,7 +66,9 @@
                     "type": "textarea", "rows": 5,
                     "id": "businessAddress2",
                     "name": "businessAddress2",
-                    "showicons": true
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":200
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -70,7 +78,9 @@
                     "type": "text", 
                     "id": "businessCity",
                     "name": "businessCity",
-                    "showicons": true
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -81,7 +91,9 @@
                     "options":[{"value":"Andhra Pradesh"},{"value":"Arunachal Pradesh"},{"value":"Assam"},{"value":"Bihar"},{"value":"Chhattisgarh"},{"value":"Chandigarh"},{"value":"Dadra and Nagar Haveli"},{"value":"Daman and Diu"},{"value":"Delhi"},{"value":"Goa"},{"value":"Gujarat"},{"value":"Haryana"},{"value":"Himachal Pradesh"},{"value":"Jammu and Kashmir"},{"value":"Jharkhand"},{"value":"Karnataka"},{"value":"Kerala"},{"value":"Madhya Pradesh"},{"value":"Maharashtra"},{"value":"Manipur"},{"value":"Meghalaya"},{"value":"Mizoram"},{"value":"Nagaland"},{"value":"Orissa"},{"value":"Punjab"},{"value":"Pondicherry"},{"value":"Rajasthan"},{"value":"Sikkim"},{"value":"Tamil Nadu"},{"value":"Tripura"},{"value":"Uttar Pradesh"},{"value":"Uttarakhand"},{"value":"West Bengal"}],
                     "id": "businessState",
                     "name": "businessState",
-                    "showicons": true
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -102,7 +114,9 @@
                     "type": "number",
                     "id": "businessNoOfLocations",
                     "name": "businessNoOfLocations",
-                    "showicons": true
+                    "showicons": true,
+                    "minlength":1,
+                    "maxlength":5
                 }
             ]
         },
@@ -139,7 +153,9 @@
                     "id": "contactName",
                     "name": "name",
                     "showicons": true,
-                    "required":true
+                    "required":true,
+                    "minlength":2,
+                    "maxlength":50
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -147,9 +163,11 @@
                     "inputClass": "form-group label-floating",
                     "label": "Email ",
                     "type": "email",
-                    "id": "email",
-                    "name": "email",
-                    "showicons": true
+                    "id": "eemail",
+                    "name": "eemail",
+                    "showicons": true,
+                    "minlength":0,
+                    "maxlength":50
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -160,7 +178,9 @@
                     "id": "password",
                     "name": "password",
                     "showicons": true,
-                    "required":true
+                    "required":true,
+                    "minlength":8,
+                    "maxlength":50
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -171,7 +191,9 @@
                     "id": "phone",
                     "name": "phone",
                     "showicons": true,
-                    "required":true
+                    "required":true,
+                    "minlength":8,
+                    "maxlength":10
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -181,7 +203,9 @@
                     "type": "text",
                     "id": "alt_phone",
                     "name": "alt_phone",
-                    "showicons": true
+                    "showicons": true,
+                    "minlength":8,
+                    "maxlength":10
                 },
                 {
                     "layoutClass": "col-sm-6",

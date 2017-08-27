@@ -18,7 +18,7 @@ module.exports.register=function(req,res){
         console.log(files);
         req.body=fields;
     var users={
-                "email":req.body.email[0],
+                "email":req.body.eemail[0],
                 "password":req.body.password[0],
                 "phone":req.body.phone[0],
                 "user_role":2, 
@@ -73,121 +73,126 @@ module.exports.register=function(req,res){
         }
     else
         {
-             console.log("entered1");
-             var file_to_save='image_'+ randtoken.generate(16) + new Date().getFullYear() + '___profile.' + files.businessLogo[0].originalFilename;
-            var oldpath = files.businessLogo[0].path;
-            var newpath = 'C:/Users/user/Desktop/nodeimages/'+file_to_save;
-            if (path.extname(files.businessLogo[0].path).toLowerCase() === '.png' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpeg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.gif') {
-                fs.rename(oldpath, newpath, function(err) {
-                    console.log("entered2");
-                    if (err) {
-                        business.businessLogo=oldpath;
-                        console.log(err);
-                        sess.error="Error in image uploading";
-                        var result = {};           
-                        Object.keys(users).forEach((key) => result[key] = users[key]);
-                        Object.keys(business).forEach((key) => result[key] = business[key]);
+            business.businessLogo=''; 
+            if(files.businessLogo[0].size>0){
+                var file_to_save='image_'+ randtoken.generate(16) + new Date().getFullYear() + '___profile.' + files.businessLogo[0].originalFilename;
+                var oldpath = files.businessLogo[0].path;
+                var newpath = 'C:/Users/user/Desktop/nodeimages/'+file_to_save;
+                if (path.extname(files.businessLogo[0].path).toLowerCase() === '.png' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpeg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.gif') {
+                    fs.rename(oldpath, newpath, function(err) {
+                        console.log("entered2");
+                        if (err) {
+                            business.businessLogo=oldpath;
+                            console.log(err);
+                            sess.error="Error in image uploading";
+                            var result = {};           
+                            Object.keys(users).forEach((key) => result[key] = users[key]);
+                            Object.keys(business).forEach((key) => result[key] = business[key]);
+                            
+                            sess.formData=result;            
+                            res.redirect('/listbusiness');
+                        }
+                        else{
+                            console.log("entered3");
+                            business.businessLogo=file_to_save;                            
+                            }    
+                    });
+                } else {
+                    fs.unlink(newpath, function () {
                         
-                        sess.formData=result;            
-                        res.redirect('/listbusiness');
-                    }
-                    else{
-                         console.log("entered3");
-                        business.businessLogo=file_to_save;
-                        business.businessCategories=selectedCategories;
-                        connection.query('SELECT * FROM users WHERE phone = ?  OR (email = ? AND email!="") ',[req.body.phone[0],req.body.email[0]], function (error, results, fields) {
-                            if(results.length)
-                                {
-                                    sess.error="Email or Phone number already exists";
-                                    var result = {};           
-                                    Object.keys(users).forEach((key) => result[key] = users[key]);
-                                    Object.keys(business).forEach((key) => result[key] = business[key]);
-                                    
-                                    sess.formData=result;          
-                                    res.redirect('/listbusiness');   
-                                }
-                            else
-                                {
-                                    connection.beginTransaction(function(err) {
-                                      if (err) { 
-                                        console.log(err);
-                                        sess.error=JSON.stringify(err);
-                                        var result = {};           
-                                        Object.keys(users).forEach((key) => result[key] = users[key]);
-                                        Object.keys(business).forEach((key) => result[key] = business[key]);
-                                        
-                                        sess.formData=result;          
-                                        res.redirect('/listbusiness');   
-                                      }
+                             sess.error="Only .png,.jpg,.jpeg and .gif images are allowed";
+                            var result = {};           
+                            Object.keys(users).forEach((key) => result[key] = users[key]);
+                            Object.keys(business).forEach((key) => result[key] = business[key]);
+                            
+                            sess.formData=result;          
+                            res.redirect('/listbusiness');   
+                        
+                    });
+                }     
+            }
 
-                                      connection.query('INSERT INTO users SET ?',users, function (error, results, fields) {
-                                      if (error) {
-                                        console.log(error);
-                                        sess.error=JSON.stringify(error.sqlMessage);
-                                        var result = {};           
-                                        Object.keys(users).forEach((key) => result[key] = users[key]);
-                                        Object.keys(business).forEach((key) => result[key] = business[key]);
-                                        
-                                        sess.formData=result;          
-                                        res.redirect('/listbusiness');   
-                                      }else{
-                                            console.log(results);
-                                            business.businessCreatedBy=results.insertId;
-                                                connection.query('INSERT INTO business SET ?',business, function (error, results, fields) {
-                                                  if (error) {
-                                                      connection.rollback(function() {
-                                                      console.log(error);
-                                                      sess.error=errors;
-                                                      var result = {};           
-                                                      Object.keys(users).forEach((key) => result[key] = users[key]);
-                                                      Object.keys(business).forEach((key) => result[key] = business[key]);
-                                                      
-                                                      sess.formData=result;
-                                                      res.redirect('/listbusiness');  
-                                                    });
-                                                     
-                                                  }else{
-                                                        
-                                                        connection.commit(function(err) {
-                                                            if (err) {
-                                                              return connection.rollback(function() {
-                                                                  console.log(err);
-                                                                  sess.error=JSON.stringify(err);
-                                                                  var result = {};           
-                                                                  Object.keys(users).forEach((key) => result[key] = users[key]);
-                                                                  Object.keys(business).forEach((key) => result[key] = business[key]);
-                                                                  
-                                                                  sess.formData=result;
-                                                                  res.redirect('/listbusiness'); 
-                                                              });
-                                                            }
-                                                            sess.message="You have successfully signed up.";
-                                                            res.redirect('/listbusiness');  
-                                                          });                                               
-                                                    }                
-                                                 
-                                                });
-                                            }
-                                      });
-                                    });
-                                }
-
-                       });       
-                    }    
-                });            
-            } else {
-                fs.unlink(newpath, function () {
-                    
-                         sess.error="Only .png,.jpg,.jpeg and .gif images are allowed";
+            // Save record 
+            business.businessCategories=selectedCategories;
+            connection.query('SELECT * FROM users WHERE phone = ?  OR (email = ? AND email!="") ',[req.body.phone[0],req.body.eemail[0]], function (error, results, fields) {
+                if(results.length)
+                    {
+                        sess.error="Email or Phone number already exists";
                         var result = {};           
                         Object.keys(users).forEach((key) => result[key] = users[key]);
                         Object.keys(business).forEach((key) => result[key] = business[key]);
                         
                         sess.formData=result;          
                         res.redirect('/listbusiness');   
-                    
-                });
-            }       
+                    }
+                else
+                    {
+                        connection.beginTransaction(function(err) {
+                          if (err) { 
+                            console.log(err);
+                            sess.error=JSON.stringify(err);
+                            var result = {};           
+                            Object.keys(users).forEach((key) => result[key] = users[key]);
+                            Object.keys(business).forEach((key) => result[key] = business[key]);
+                            
+                            sess.formData=result;          
+                            res.redirect('/listbusiness');   
+                          }
+
+                          connection.query('INSERT INTO users SET ?',users, function (error, results, fields) {
+                          if (error) {
+                            console.log(error);
+                            sess.error=JSON.stringify(error.sqlMessage);
+                            var result = {};           
+                            Object.keys(users).forEach((key) => result[key] = users[key]);
+                            Object.keys(business).forEach((key) => result[key] = business[key]);
+                            
+                            sess.formData=result;          
+                            res.redirect('/listbusiness');   
+                          }else{
+                                console.log(results);
+                                business.businessCreatedBy=results.insertId;
+                                    connection.query('INSERT INTO business SET ?',business, function (error, results, fields) {
+                                      if (error) {
+                                          connection.rollback(function() {
+                                          console.log(error);
+                                          sess.error=errors;
+                                          var result = {};           
+                                          Object.keys(users).forEach((key) => result[key] = users[key]);
+                                          Object.keys(business).forEach((key) => result[key] = business[key]);
+                                          
+                                          sess.formData=result;
+                                          res.redirect('/listbusiness');  
+                                        });
+                                         
+                                      }else{
+                                            
+                                            connection.commit(function(err) {
+                                                if (err) {
+                                                  return connection.rollback(function() {
+                                                      console.log(err);
+                                                      sess.error=JSON.stringify(err);
+                                                      var result = {};           
+                                                      Object.keys(users).forEach((key) => result[key] = users[key]);
+                                                      Object.keys(business).forEach((key) => result[key] = business[key]);
+                                                      
+                                                      sess.formData=result;
+                                                      res.redirect('/listbusiness'); 
+                                                  });
+                                                }
+                                                sess.message="You have successfully signed up.";
+                                                res.redirect('/listbusiness');  
+                                              });                                               
+                                        }                
+                                     
+                                    });
+                                }
+                          });
+                        });
+                    }
+
+                });       
+
         }           
      });    
     }

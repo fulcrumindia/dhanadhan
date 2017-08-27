@@ -66,10 +66,10 @@ module.exports.dealsList=function(req,res){
     if(sess.token && sess.userRole==2){
          connection.query('SELECT * FROM deals WHERE dealCreatedBy = ?',[sess.userId], function (error, results, fields) {
           if (error) {
-              res.render('./deals',{error:error});
+              res.render('./deals',{error:error,newdealpagelink:'addDeal'});
           }else{
             console.log(results);
-            res.render('./deals',{results:results,layout:'seller',label:labels});
+            res.render('./deals',{results:results,layout:'seller',label:labels,newdealpagelink:'addDeal'});
           }
         });
     }

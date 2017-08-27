@@ -12,10 +12,6 @@ const expressValidator = require('express-validator');
 // custom config
 //const config = require('./config/database');
 
-var authenticateController=require('./controllers/authenticate-controller');
-var registerController=require('./controllers/register-controller');
-var dealController=require('./controllers/deal-controller');
-
 // body parse middleware
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
@@ -23,6 +19,12 @@ app.use(bodyParser({uploadDir:'/profileImages'}));
 app.use(expressValidator()); // Add this after the bodyParser middlewares!
 app.use(session({secret: 'Lbim2201'}));
 var sess;
+
+
+var authenticateController=require('./controllers/authenticate-controller');
+var registerController=require('./controllers/register-controller');
+var dealController=require('./controllers/deal-controller');
+
 // default data
 const labels = require('./data/labels.json');
 const listBusiness = require('./data/listbusiness.json');
@@ -137,7 +139,7 @@ app.get('/listbusiness',(req,res)=>{
         else
             sess.selectedCategories = "";
         console.log(sess.selectedCategories);
-    var view = {
+        var view = {
         label:labels,
         flashmessage:sess.message,
         flasherror:sess.error,
