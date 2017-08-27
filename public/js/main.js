@@ -47,6 +47,24 @@ jQuery(document).ready(function($){
 		selected.parent('ul').addClass('is-hidden').parent('.has-children').parent('ul').removeClass('move-out');
 	}); 
 
+	var selectedCategories=new Array;
+	$(".btn-next").click(function(){
+		$("#category .choice.active").each(function(){
+				selectedCategories.push($(this).find('h6').text());
+			});
+		console.log(selectedCategories);
+		$("#selectedCategories").remove();
+		$("#wizardProfile form").append("<input id='selectedCategories' type='hidden' name='selectedCategories' value='"+selectedCategories+"'/>");
+	});
+	//jQuery("#businessNoOfLocations").parent().hide();
+
+	jQuery("#businessHaveMultipleLocation").change(function(){
+		if(jQuery(this).val()=='Yes') 
+			jQuery('#businessNoOfLocations').parent().show(); 
+		else 
+			jQuery('#businessNoOfLocations').parent().hide();
+	});
+
 	function toggleNav(){
 		var navIsVisible = ( !$('.cd-dropdown').hasClass('dropdown-is-active') ) ? true : false;
 		$('.cd-dropdown').toggleClass('dropdown-is-active', navIsVisible);
@@ -58,7 +76,7 @@ jQuery(document).ready(function($){
 				$('.is-active').removeClass('is-active');
 			});	
 		}
-	}
+	}	
 
-	 
 });
+
