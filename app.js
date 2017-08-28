@@ -28,7 +28,7 @@ var dealController=require('./controllers/deal-controller');
 // default data
 const labels = require('./data/labels.json');
 const listBusiness = require('./data/listbusiness.json');
-const adddeals = require('./data/deals.json');
+const adddeals = require('./data/dealsform.json');
 const categories = require('./data/categories.json');
 
 // models

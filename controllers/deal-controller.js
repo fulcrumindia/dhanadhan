@@ -2,7 +2,7 @@ var connection = require('./../config');
 const session = require('express-session');
 var sess;
 const labels = require('./../data/labels.json');
-const adddeals = require('./../data/deals.json');
+const adddeals = require('./../data/dealsform.json');
 const categories = require('./../data/categories.json');
 
 var check = require('validator').check,sanitize = require('validator').sanitize;
