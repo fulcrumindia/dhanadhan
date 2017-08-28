@@ -122,6 +122,7 @@ module.exports.updatedeal=function (req,res){
                     frmdata:sess.formData,
                     flasherror:sess.error,
                     flashmessage:sess.message,
+                    label:labels,
                     layout:'seller',
                     helpers: {
                         switch: function (value, options) { 

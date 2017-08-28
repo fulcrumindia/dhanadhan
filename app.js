@@ -221,10 +221,12 @@ app.get('/listbusiness',(req,res)=>{
     }
 });
 
+app.get('/updatedeal',dealController.updatedeal);
+
 // adddeals route
 app.get('/adddeal',(req,res)=>{
-    sess=req.session;
     adddeals.header="Add Deal";
+    sess=req.session;
     if(sess.token && sess.userRole==2){
         var view = {
         wizarddata: adddeals,
@@ -233,6 +235,7 @@ app.get('/adddeal',(req,res)=>{
         frmdata:sess.formData,
         flasherror:sess.error,
         flashmessage:sess.message,
+        label:labels,
         layout:'seller',
         helpers: {
             switch: function (value, options) { 
@@ -312,89 +315,7 @@ app.get('/adddeal',(req,res)=>{
     }
     else
     {
-        res.redirect('deals');
-    }
-});
-// adddeals route
-app.get('/updatedeal',dealController.updatedeal);
-// adddeals route
-app.get('/adddeal',(req,res)=>{
-    sess=req.session;
-    if(sess.token && sess.userRole==2){
-        var view = {
-        wizarddata: adddeals,
-        categories: categories,
-        adddeal:"adddeal",
-        frmdata:sess.formData,
-        flasherror:sess.error,
-        flashmessage:sess.message,
-        layout:'seller',
-        helpers: {
-            switch: function (value, options) { 
-                this._switch_value_ = value;
-                var html = options.fn(this); // Process the body of the switch block
-                delete this._switch_value_;
-                return html;
-            },
-            case: function (value, options) { 
-                var args = Array.prototype.slice.call(arguments);
-                var options    = args.pop();
-                var caseValues = args;
-
-                if (this._switch_break_ || caseValues.indexOf(this._switch_value_) === -1) {
-                    return '';
-                } else {
-                    if (options.hash.break === true) {
-                        this._switch_break_ = true;
-                    }
-                    return options.fn(this);
-                }
-            },
-            default: function(options) {
-                if (!this._switch_break_) {
-                    return options.fn(this);
-                }
-            },
-            equal:function (v1,  v2, msg, options) {
-                
-                        if (v1 == v2)
-                            return '<h6 class="text-danger">'+msg+'</h6>';
-                        else
-                            return '';
-                    
-                },
-            equalality:function (v1,  v2, options) {                
-                        if (v1 == v2)
-                            return 'active';
-                        else
-                            return '';
-                    
-                },
-            checktype:function (v1,  v2, options) {                
-                         if(typeof v1!=undefined && v1!=undefined)
-                            {
-                                if (typeof v1 == 'object')
-                                    return "<h6 class='text-danger'>Validation error occurred</h6>";
-                                else
-                                    return "<h6 class='text-danger'>"+v1+"</h6>";
-                            }
-                          else
-                            return '';  
-                    
-                }
-            
-        }
-
-        
-    }
-    sess.error='';
-    sess.message='';
-    sess.formData='';
-    res.render('adddeal',view);
-    }
-    else
-    {
-        res.redirect('deals');
+        res.redirect('login');
     }
 });
 

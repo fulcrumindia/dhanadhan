@@ -18,7 +18,7 @@
         {{/case}}
         {{#case "checkbox"}}
             <input type="{{type}}" id="{{name}}"  name="{{name}}" class="form-control"
-            {{#if @root.frmdata}} value="{{lookup @root.frmdata name}}"  {{/if}} {{#checkbox @root.frmdata name}}{{/checkbox}}>
+            {{#if @root.frmdata}} value="{{lookup @root.frmdata name}}" {{#checkbox @root.frmdata name}}{{/checkbox}} {{/if}}>
             {{#if @root.flasherror}}
                 {{#each @root.flasherror}}                            
                     {{#equal param ../name msg}}
@@ -40,9 +40,15 @@
         {{/case}}
         {{#case "select"}}
             <select id="{{name}}" name="{{name}}" class="form-control">
-                {{#each options}}
-                    <option value="{{value}}" {{#selectedoption @root.frmdata ../name value}}{{/selectedoption}}>{{value}}</option>
-                {{/each}}
+                {{#if src}}
+                    {{#each  (lookup @root src)}}                        
+                        <option value="{{name}}" {{#if @root.frmdata}}{{#selectedoption @root.frmdata ../name name}}{{/selectedoption}}{{/if}}>{{name}}</option>            
+                    {{/each}}
+                {{else}}
+                    {{#each options}}
+                        <option value="{{value}}" {{#if @root.frmdata}}{{#selectedoption @root.frmdata ../name value}}{{/selectedoption}}{{/if}}>{{value}}</option>
+                    {{/each}}
+                {{/if}}                
             </select>
         {{/case}}
     {{/switch}}            
