@@ -38,7 +38,7 @@
                 {{#case "select"}}
                     <select id="{{name}}" name="{{name}}" class="form-control">
                         {{#each options}}
-                            <option value="{{value}}" {{#if @root.frmdata.businessNoOfLocations}} {{#if @root.frmdata.businessNoOfLocations value}} selected="selected" {{/if}}{{/if}}>{{value}}</option>
+                            <option value="{{value}}" {{#if @root.frmdata.businessNoOfLocations value}} selected="selected" {{/if}}>{{value}}</option>
                         {{/each}}
                     </select>
                 {{/case}}

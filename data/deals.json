@@ -1,53 +1,163 @@
-[
-    {
-        "category": "Home Decor",
-        "subcategory": "Household Utensils",
-        "store": "US Dollar Store",
-        "storeaddress": "Shankar Nagar, Sec-1",
-        "city": "Raipur",
-        "state": "Chhattisgarh",
-        "offer" : "Sale on wrist watches upto 30% off",
-        "link": "#",
-        "instruction": "Visit today and be a part of biggest loyalty program",
-        "color": "red",
-        "display": 1,
-        "main":1,
-        "phone": "",
-        "email": "",
-        "logo": ""
-    },
-    {
-        "category": "Fashion & Jewellery",
-        "subcategory": "Jewellery",
-        "store": "Babulal Jewellers",
-        "storeaddress": "DM Plaza, Chotapara",
-        "city": "Raipur",
-        "state": "Chhattisgarh",
-        "offer" : "Flat 25% off on making charges.",
-        "link": "#",
-        "instruction": "Valid till 30th June 2017",
-        "color": "orange",
-        "display": 1,
-        "main":1,
-        "phone": "",
-        "email": "",
-        "logo": ""
-    },
-    {
-        "category": "Fashion",
-        "subcategory": "Apparels",
-        "store": "Central",
-        "storeaddress": "City Center mall, pandri",
-        "city": "Raipur",
-        "state": "Chhattisgarh",
-        "offer" : "Happiness Sale upto 51% off",
-        "link": "#",
-        "instruction": "Additonal 10% discount on shopping with Axis bank Debit & credit card.",
-        "color": "blue",
-        "display": 1,
-        "main":1,
-        "phone": "",
-        "email": "",
-        "logo": ""
-    }
-]
+{
+    "name": "add deal",
+    "header": "Add Deal",
+    "title": "Add deal",
+    "description": "This information will let us know more about you." ,
+    "color": "purple",
+     "fields": [
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Categroy",
+                    "type": "text",
+                    "id": "dealCategory",
+                    "name": "dealCategory",
+                    "showicons": true,
+                    "required":true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Sub Categroy",
+                    "type": "text",
+                    "id": "dealSubcategory",
+                    "name": "dealSubcategory",
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Store",
+                    "type": "textarea",
+                    "id": "dealStore",
+                    "name": "dealStore",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Store Address",
+                    "type": "textarea",
+                    "id": "dealStoreAddress",
+                    "name": "dealStoreAddress",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":100
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "City",
+                    "type": "text", 
+                    "id": "dealCity",
+                    "name": "dealCity",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "State",
+                    "type": "select",
+                    "options":[{"value":"Andhra Pradesh"},{"value":"Arunachal Pradesh"},{"value":"Assam"},{"value":"Bihar"},{"value":"Chhattisgarh"},{"value":"Chandigarh"},{"value":"Dadra and Nagar Haveli"},{"value":"Daman and Diu"},{"value":"Delhi"},{"value":"Goa"},{"value":"Gujarat"},{"value":"Haryana"},{"value":"Himachal Pradesh"},{"value":"Jammu and Kashmir"},{"value":"Jharkhand"},{"value":"Karnataka"},{"value":"Kerala"},{"value":"Madhya Pradesh"},{"value":"Maharashtra"},{"value":"Manipur"},{"value":"Meghalaya"},{"value":"Mizoram"},{"value":"Nagaland"},{"value":"Orissa"},{"value":"Punjab"},{"value":"Pondicherry"},{"value":"Rajasthan"},{"value":"Sikkim"},{"value":"Tamil Nadu"},{"value":"Tripura"},{"value":"Uttar Pradesh"},{"value":"Uttarakhand"},{"value":"West Bengal"}],
+                    "id": "dealState",
+                    "name": "dealState",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Offer",
+                    "type": "text", 
+                    "id": "dealOffer",
+                    "name": "dealOffer",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":200
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Link",
+                    "type": "text", 
+                    "id": "dealLink",
+                    "name": "dealLink",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":200
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Instructions",
+                    "type": "textarea", "rows":5,
+                    "id": "dealInstructions",
+                    "name": "dealInstructions",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Disclaimer",
+                    "type": "textarea", "rows":5,
+                    "id": "dealDisclaimer",
+                    "name": "dealDisclaimer",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Color",
+                    "type": "text",
+                    "id": "dealColor",
+                    "name": "dealColor",
+                    "showicons": true                    
+                },
+                {
+
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Display",
+                    "type": "checkbox",
+                    "id": "dealDisplay",
+                    "name": "dealDisplay",
+                    "showicons": true                
+                },
+                {
+
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Main",
+                    "type": "checkbox",
+                    "id": "dealMain",
+                    "name": "dealMain",
+                    "showicons": true
+                }
+                
+            ]        
+}

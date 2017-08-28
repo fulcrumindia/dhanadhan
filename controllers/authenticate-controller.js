@@ -10,6 +10,7 @@ module.exports.authenticate=function(req,res){
     var password=req.body.password;
     connection.query('SELECT * FROM users WHERE phone = ?',[phone], function (error, results, fields) {
       if (error) {
+        console.log(error);
           sess.error="Internal server error.";
           res.redirect('/login');
       }else{

@@ -44,7 +44,7 @@ CREATE TABLE `categories` (
 
 CREATE TABLE `deals` (
   `dealId` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `dealCategory` int(11) NOT NULL,
+  `dealCategory` varchar(50) NOT NULL,
   `dealSubcategory` varchar(50) NOT NULL,
   `dealStore` varchar(100) NOT NULL,
   `dealStoreAddress` varchar(200) NOT NULL,
@@ -52,6 +52,7 @@ CREATE TABLE `deals` (
   `dealState` varchar(60) NOT NULL,
   `dealOffer` varchar(200) NOT NULL,
   `dealInstructions` text NOT NULL,
+  `dealDisclaimer` text NOT NULL,
   `dealColor` varchar(20) NOT NULL,
   `dealDisplay` tinyint(4) NOT NULL,
   `dealMain` tinyint(4) NOT NULL,
