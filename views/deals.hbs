@@ -1,5 +1,5 @@
 <!--   Big container   -->
-<div> <a href="/{{newdealpagelink}}" class="btn-success btn">Add New Deal</a></div>
+<div> <a href="{{newdealpagelink}}" class="btn-success btn">Add New Deal</a></div>
 
 <div class="card">
     <div class="row">
@@ -11,9 +11,9 @@
             <!--      Wizard container        -->
             {{#if results}}
                 <table class="table responsive">
-                    <tr><th>Deal Subcategory</th><th>Deal Store</th><th>Deal Store Address</th><th>Deal City</th><th>Deal State</th><th>Deal Offer</th><th>Action</th></tr>
+                    <tr><th>Store</th><th>Offer</th><th>Color</th><th>Display</th><th>Main</th><th>Action</th></tr>
                 {{#each results}}
-                   <tr><td> {{dealSubcategory}}</td><td> {{dealStore}}</td><td> {{dealStoreAddress}}</td><td> {{dealCity}}</td><td> {{dealState}}</td><td> {{dealOffer}}</td><td><a href="/updatedeal?dealid={{dealId}}" class=" text-success">Update</a><a href="#"  data-toggle="modal" data-id={{dealId}} data-target="#myModal" onclick="showdeletepopup(this)"  class="deletedeal text-danger pull-right">Delete</a></td></tr>
+                   <tr><td>{{dealStoreAddress}}</td><td>{{dealOffer}}</td><td>{{dealColor}}</td><td>{{#if dealDisaply}}Yes{{else}}No{{/if}}</td><td>{{#if dealMain}}Yes{{else}}No{{/if}}</td><td><a href="{{@root.updatedeal}}?dealid={{dealId}}" class=" text-success">Update</a><a href="#"  data-toggle="modal" data-id={{dealId}} data-target="#myModal" onclick="showdeletepopup(this)"  class="deletedeal text-danger pull-right">Delete</a></td></tr>
                 {{/each}}
                 </table>
             {{else}}

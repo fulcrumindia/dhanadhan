@@ -1,0 +1,16 @@
+{
+	"addDealError":"Deal could not be added.",
+	"addDealSuccess":"Deal successfully added.",
+	"updateDealError":"Deal could not be updated.",
+	"updateDealSuccess":"Deal successfully updated.",
+	"deleteDealSuccess":"Deal successfully deleted.",
+	"deleteDealError":"Deal could not be deleted.",
+	"loginFailedISE":"Internal server error.",
+	"emailPhoneExists":"Email or Phone number already exists",
+	"authenticationError":"Phone and password does not match",
+	"loginPhoneNotExists":"Phone does not exists",
+	"InternalServerError":"Internal server error.",
+	"imageUploadingError":"Error in image uploading",
+	"imageExtError":"Only .png,.jpg,.jpeg and .gif images are allowed",
+	"listbusinessAddedSuccess":"You have successfully signed up."
+}

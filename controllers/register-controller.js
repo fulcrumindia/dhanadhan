@@ -3,6 +3,8 @@ const session = require('express-session');
 var sess;
 var check = require('validator').check,sanitize = require('validator').sanitize;
 const path = require('path');
+const siteUrls = require('./../data/siteUrls.json');
+const ErrorMessages = require('./../data/errorMessages.json');
 var fs = require('fs');
 var http = require('http');
 var multiparty = require('multiparty');
@@ -69,7 +71,7 @@ module.exports.register=function(req,res){
             Object.keys(business).forEach((key) => result[key] = business[key]);
             
             sess.formData=result;            
-            res.redirect('/listbusiness');   
+            res.redirect(siteUrls.listbusiness);   
         }
     else
         {
@@ -84,13 +86,13 @@ module.exports.register=function(req,res){
                         if (err) {
                             business.businessLogo=oldpath;
                             console.log(err);
-                            sess.error="Error in image uploading";
+                            sess.error=ErrorMessages.imageUploadingError;
                             var result = {};           
                             Object.keys(users).forEach((key) => result[key] = users[key]);
                             Object.keys(business).forEach((key) => result[key] = business[key]);
                             
                             sess.formData=result;            
-                            res.redirect('/listbusiness');
+                            res.redirect(siteUrls.listbusiness);
                         }
                         else{
                             console.log("entered3");
@@ -100,13 +102,13 @@ module.exports.register=function(req,res){
                 } else {
                     fs.unlink(newpath, function () {
                         
-                             sess.error="Only .png,.jpg,.jpeg and .gif images are allowed";
+                            sess.error=ErrorMessages.imageExtError;
                             var result = {};           
                             Object.keys(users).forEach((key) => result[key] = users[key]);
                             Object.keys(business).forEach((key) => result[key] = business[key]);
                             
                             sess.formData=result;          
-                            res.redirect('/listbusiness');   
+                            res.redirect(siteUrls.listbusiness);   
                         
                     });
                 }     
@@ -117,13 +119,13 @@ module.exports.register=function(req,res){
             connection.query('SELECT * FROM users WHERE phone = ?  OR (email = ? AND email!="") ',[req.body.phone[0],req.body.eemail[0]], function (error, results, fields) {
                 if(results.length)
                     {
-                        sess.error="Email or Phone number already exists";
+                        sess.error=ErrorMessages.emailPhoneExists;
                         var result = {};           
                         Object.keys(users).forEach((key) => result[key] = users[key]);
                         Object.keys(business).forEach((key) => result[key] = business[key]);
                         
                         sess.formData=result;          
-                        res.redirect('/listbusiness');   
+                        res.redirect(siteUrls.listbusiness);   
                     }
                 else
                     {
@@ -136,7 +138,7 @@ module.exports.register=function(req,res){
                             Object.keys(business).forEach((key) => result[key] = business[key]);
                             
                             sess.formData=result;          
-                            res.redirect('/listbusiness');   
+                            res.redirect(siteUrls.listbusiness);   
                           }
 
                           connection.query('INSERT INTO users SET ?',users, function (error, results, fields) {
@@ -148,7 +150,7 @@ module.exports.register=function(req,res){
                             Object.keys(business).forEach((key) => result[key] = business[key]);
                             
                             sess.formData=result;          
-                            res.redirect('/listbusiness');   
+                            res.redirect(siteUrls.listbusiness);   
                           }else{
                                 console.log(results);
                                 business.businessCreatedBy=results.insertId;
@@ -162,7 +164,7 @@ module.exports.register=function(req,res){
                                           Object.keys(business).forEach((key) => result[key] = business[key]);
                                           
                                           sess.formData=result;
-                                          res.redirect('/listbusiness');  
+                                          res.redirect(siteUrlslistbusiness);  
                                         });
                                          
                                       }else{
@@ -177,11 +179,11 @@ module.exports.register=function(req,res){
                                                       Object.keys(business).forEach((key) => result[key] = business[key]);
                                                       
                                                       sess.formData=result;
-                                                      res.redirect('/listbusiness'); 
+                                                      res.redirect(siteUrls.listbusiness); 
                                                   });
                                                 }
-                                                sess.message="You have successfully signed up.";
-                                                res.redirect('/listbusiness');  
+                                                sess.message=ErrorMessages.listbusinessAddedSuccess;
+                                                res.redirect(siteUrls.listbusiness);  
                                               });                                               
                                         }                
                                      
@@ -198,6 +200,6 @@ module.exports.register=function(req,res){
     }
     else
     {
-        res.redirect('deals');
+        res.redirect(siteUrls.sellerDeals);
     }
 }

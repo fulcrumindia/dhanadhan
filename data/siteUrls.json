@@ -1,0 +1,11 @@
+{
+	"sellerDeals":"/seller/deals",
+	"sellerAddDeal":"/seller/adddeal",
+	"sellerUpdateDeal":"/seller/updatedeal",
+	"listbusiness":"/listbusiness",
+	"login":"/login",
+	"signup":"/signup",
+	"deleteDeal":"/deletedeal",
+	"logout":"/logout",
+	"contact":"/contact"
+}

@@ -1,6 +1,7 @@
 var connection = require('./../config');
 const session = require('express-session');
-
+const siteUrls = require('./../data/siteUrls.json');
+const ErrorMessages = require('./../data/errorMessages.json');
 var randtoken = require('rand-token');
 var sess;
 module.exports.authenticate=function(req,res){
@@ -11,8 +12,8 @@ module.exports.authenticate=function(req,res){
     connection.query('SELECT * FROM users WHERE phone = ?',[phone], function (error, results, fields) {
       if (error) {
         console.log(error);
-          sess.error="Internal server error.";
-          res.redirect('/login');
+          sess.error=ErrorMessages.InternalServerError;
+          res.redirect(siteUrls.login);
       }else{
         if(results.length >0){
             if(password==results[0].password){
@@ -20,22 +21,22 @@ module.exports.authenticate=function(req,res){
               sess.userId=results[0].id;
               sess.userRole=results[0].user_role;
               sess.token=randtoken.generate(16);
-              res.redirect('/deals');
+              res.redirect(siteUrls.sellerDeals);
             }else{
-                sess.error="Phone and password does not match";
-                res.redirect('/login');
+                sess.error=ErrorMessages.authenticationError;
+                res.redirect(siteUrls.login);
             }
          
         }
         else{
-          sess.error="Phone does not exists"
-          res.redirect('/login');
+          sess.error=ErrorMessages.loginPhoneNotExists;
+          res.redirect(siteUrls.login);
         }
       }
     });
   }
   else
   {
-    res.redirect('/deals');
+    res.redirect(siteUrls.sellerDeals);
   }
 }

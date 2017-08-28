@@ -30,6 +30,8 @@ const labels = require('./data/labels.json');
 const listBusiness = require('./data/listbusiness.json');
 const adddeals = require('./data/dealsform.json');
 const categories = require('./data/categories.json');
+const siteUrls = require('./data/siteUrls.json');
+const ErrorMessages = require('./data/errorMessages.json');
 
 // models
 const Banners = require('./models/Banners');
@@ -53,15 +55,15 @@ app.use(cors());
 // routes
 app.use('/api',api);
 /* route to handle login and registration */
-app.post('/listbusiness',registerController.register); // Create Seller and Business 
-app.post('/adddeal',dealController.createDeal); // Create Deal
-app.post('/updatedeal',dealController.updateDealData); // Update Deal
-app.get('/deletedeal',dealController.deletedeal); // Delete Deal
+app.post(siteUrls.listbusiness,registerController.register); // Create Seller and Business 
+app.post(siteUrls.sellerAddDeal,dealController.createDeal); // Create Deal
+app.post(siteUrls.sellerUpdateDeal,dealController.updateDealData); // Update Deal
+app.get(siteUrls.deleteDeal,dealController.deletedeal); // Delete Deal
 
-app.post('/login',authenticateController.authenticate);
+app.post(siteUrls.login,authenticateController.authenticate);
 // static path
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/seller/',express.static(__dirname+'/public'));
 // index route
 app.get('/',(req,res)=>{
     var view = {
@@ -74,7 +76,7 @@ app.get('/',(req,res)=>{
 });
 
 // contact route
-app.get('/contact',(req,res)=>{
+app.get(siteUrls.contact,(req,res)=>{
     var view = {
         label:labels
     }
@@ -82,14 +84,14 @@ app.get('/contact',(req,res)=>{
 });
 
 // login route
-app.get('/login',(req,res)=>{
+app.get(siteUrls.login,(req,res)=>{
     sess=req.session;
     if(sess.token) {
         /*
         * This line check Session existence.
         * If it existed will do some action.
         */
-            res.redirect('/deals');
+            res.redirect(siteUrls.sellerDeals);
         }
         else {
             var view = {
@@ -109,21 +111,21 @@ app.get('/login',(req,res)=>{
 });
 
 // logout route
-app.get('/logout',(req,res)=>{
+app.get(siteUrls.logout,(req,res)=>{
     sess=req.session;    
     sess.token='';
     sess.userId='';
     sess.userRole='';
-    res.redirect('/login');           
+    res.redirect(siteUrls.login);           
 
 });
 
 
 // deals route
-app.get('/deals',dealController.dealsList);
+app.get(siteUrls.sellerDeals,dealController.dealsList);
 
 // signup route
-app.get('/signup',(req,res)=>{
+app.get(siteUrls.signup,(req,res)=>{
     var view = {
         label:labels
     }
@@ -131,9 +133,8 @@ app.get('/signup',(req,res)=>{
 });
 
 // listbusiness route
-app.get('/listbusiness',(req,res)=>{
+app.get(siteUrls.listbusiness,(req,res)=>{
     sess=req.session;
-    if(!sess.token){
         console.log(sess.message);
         console.log("sess.selectedCategories" + sess.selectedCategories);
         if(typeof sess.selectedCategories=='string' && sess.selectedCategories!=undefined && sess.selectedCategories!='')
@@ -214,24 +215,20 @@ app.get('/listbusiness',(req,res)=>{
     sess.formData='';
     sess.selectedCategories = "";
     res.render('listbusiness',view);
-    }
-    else
-    {
-        res.redirect('deals');
-    }
+   
 });
 
-app.get('/updatedeal',dealController.updatedeal);
+app.get(siteUrls.sellerUpdateDeal,dealController.updatedeal);
 
 // adddeals route
-app.get('/adddeal',(req,res)=>{
+app.get(siteUrls.sellerAddDeal,(req,res)=>{
     adddeals.header="Add Deal";
     sess=req.session;
     if(sess.token && sess.userRole==2){
         var view = {
         wizarddata: adddeals,
         categories: categories,
-        adddeal:"adddeal",
+        adddeal:siteUrls.sellerAddDeal,
         frmdata:sess.formData,
         flasherror:sess.error,
         flashmessage:sess.message,
@@ -315,7 +312,7 @@ app.get('/adddeal',(req,res)=>{
     }
     else
     {
-        res.redirect('login');
+        res.redirect(siteUrls.login);
     }
 });
 

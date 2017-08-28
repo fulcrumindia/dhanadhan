@@ -3,15 +3,14 @@
     <label class="control-label">{{{label}}}</label>
     {{#switch type}}
         {{#case "textarea"}}
-            <textarea class="form-control" placeholder="" rows="{{rows}}" id="{{name}}" name="{{name}}">{{#if @root.frmdata}} {{lookup @root.frmdata name}}{{/if}}</textarea>
+            <textarea class="form-control" {{#if required}} required="{{required}}" {{/if}} placeholder="" rows="{{rows}}" id="{{name}}" name="{{name}}">{{#if @root.frmdata}}{{lookup @root.frmdata name}}{{/if}}</textarea>
         {{/case}}
-        {{#case "text" "file" "email"}}
+        {{#case "text" "file" "email" "url"}}
             <input type="{{type}}" id="{{name}}" {{#if minlength}} minlength="{{minlength}}" {{/if}}  {{#if maxlength}} maxlength="{{maxlength}}" {{/if}} {{#if required}} required="{{required}}" {{/if}} name="{{name}}" class="form-control"
             {{#if @root.frmdata}} value="{{lookup @root.frmdata name}}" {{/if}}>
             {{#if @root.flasherror}}
                 {{#each @root.flasherror}}                            
-                    {{#equal param ../name msg}}
-                        
+                    {{#equal param ../name msg}}                        
                     {{/equal}}
                 {{/each}}
             {{/if}}
@@ -46,7 +45,7 @@
                     {{/each}}
                 {{else}}
                     {{#each options}}
-                        <option value="{{value}}" {{#if @root.frmdata}}{{#selectedoption @root.frmdata ../name value}}{{/selectedoption}}{{/if}}>{{value}}</option>
+                        <option value="{{value}}" {{#if @root.frmdata}}{{#selectedoption @root.frmdata ../name value}}{{/selectedoption}} {{else}} {{#if default}} selected="selected" {{/if}}{{/if}}>{{value}}</option>
                     {{/each}}
                 {{/if}}                
             </select>

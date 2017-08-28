@@ -4,6 +4,8 @@ var sess;
 const labels = require('./../data/labels.json');
 const adddeals = require('./../data/dealsform.json');
 const categories = require('./../data/categories.json');
+const siteUrls = require('./../data/siteUrls.json');
+const ErrorMessages = require('./../data/errorMessages.json');
 
 var check = require('validator').check,sanitize = require('validator').sanitize;
 var multiparty = require('multiparty');
@@ -32,7 +34,7 @@ module.exports.createDeal=function(req,res){
                 "dealLink":req.body.dealLink,
                 "dealCategory":req.body.dealCategory,
                 "dealSubcategory":req.body.dealSubcategory,
-                "dealStore":req.body.dealStore,
+                //"dealStore":req.body.dealStore,
                 "dealStoreaddress":req.body.dealStoreAddress,
                 "dealCity":req.body.dealCity,
                 "dealState":req.body.dealState,
@@ -60,20 +62,20 @@ module.exports.createDeal=function(req,res){
 
             connection.query('INSERT INTO deals SET ?',deals, function (error, results, fields) {
               if (error) {
-                sess.error=error;                
+                sess.error=ErrorMessages.addDealError;                
                 sess.formData=deals;            
-                res.redirect('/adddeal');   
+                res.redirect(siteUrls.sellerAddDeal);   
               }else{
                     sess.error=''; 
-                    sess.message="Deal successfully added.";                
-                    res.redirect('/adddeal');                               
+                    sess.message=ErrorMessages.addDealSuccess;                
+                    res.redirect(siteUrls.sellerDeals);                               
                 }            
             });
          
     }
     else
         {
-            res.redirect('/login');
+            res.redirect(siteUrls.login);
         }
 }
 
@@ -84,16 +86,16 @@ module.exports.dealsList=function(req,res){
     if(sess.token && sess.userRole==2){
          connection.query('SELECT * FROM deals WHERE dealCreatedBy = ?',[sess.userId], function (error, results, fields) {
           if (error) {
-              res.render('./deals',{error:error,newdealpagelink:'adddeal',title:'Deals'});
+              res.render('./deals',{error:error,newdealpagelink:siteUrls.sellerAddDeal,updatedeal:siteUrls.sellerUpdateDeal,title:'Deals'});
           }else{
             console.log(results);
-            res.render('./deals',{results:results,layout:'seller',label:labels,newdealpagelink:'adddeal',title:'Deals'});
+            res.render('./deals',{results:results,layout:'seller',label:labels,newdealpagelink:siteUrls.sellerAddDeal,updatedeal:siteUrls.sellerUpdateDeal,title:'Deals'});
           }
         });
     }
     else
         {
-            res.redirect('/login');
+            res.redirect(siteUrls.login);
         }
 }
 
@@ -105,12 +107,12 @@ module.exports.updatedeal=function (req,res){
               if (error) {
                 sess.error=error;                
                 sess.formData=results;            
-                res.redirect('/deals');   
+                res.redirect(siteUrls.sellerDeals);   
               }else{
                 if (!results.length) {
                     sess.error='';                
                     sess.formData='';            
-                    res.redirect('/deals');   
+                    res.redirect(siteUrls.sellerDeals);   
                   }
                   else{
                     sess.formData=results[0];  
@@ -118,7 +120,7 @@ module.exports.updatedeal=function (req,res){
                     var view = {
                     wizarddata: adddeals,
                     categories: categories,
-                    adddeal:"updatedeal",
+                    adddeal:siteUrls.sellerUpdateDeal,
                     frmdata:sess.formData,
                     flasherror:sess.error,
                     flashmessage:sess.message,
@@ -206,7 +208,7 @@ module.exports.updatedeal=function (req,res){
     }
     else
     {
-        res.redirect('deals');
+        res.redirect(siteUrls.sellerDeals);
     }
 }
 
@@ -215,10 +217,10 @@ module.exports.updateDealData=function(req,res){
     if(sess.token && sess.userRole==2){
          var today = new Date();
             var deals={
-                 "dealLink":req.body.dealLink,
+                "dealLink":req.body.dealLink,
                 "dealCategory":req.body.dealCategory,
                 "dealSubcategory":req.body.dealSubcategory,
-                "dealStore":req.body.dealStore,
+                //"dealStore":req.body.dealStore,
                 "dealStoreaddress":req.body.dealStoreAddress,
                 "dealCity":req.body.dealCity,
                 "dealState":req.body.dealState,
@@ -247,20 +249,20 @@ module.exports.updateDealData=function(req,res){
             connection.query('UPDATE deals SET ? WHERE dealId='+req.body.dealId+' AND dealCreatedBy='+sess.userId,[deals], function (error, results, fields) {
               if (error) {
                 console.log(error);
-                sess.error=error;                
+                sess.error=ErrorMessages.updateDealError;                
                 sess.formData=results;            
-                res.redirect('/deals');   
+                res.redirect(siteUrls.sellerDeals);   
               }else{
                     sess.error=''; 
-                    sess.message="Deal successfully updated.";                
-                    res.redirect('/updatedeal?dealid='+req.body.dealId);                              
+                    sess.message=ErrorMessages.updateDealSuccess;                
+                    res.redirect(siteUrls.sellerDeals);                              
                 }            
             });
          
     }
     else
         {
-            res.redirect('/login');
+            res.redirect(siteUrls.login);
         }
 }
 
@@ -272,18 +274,18 @@ module.exports.deletedeal=function(req,res){
             connection.query('DELETE FROM deals WHERE dealId='+req.query.dealid+' AND dealCreatedBy='+sess.userId,[], function (error, results, fields) {
               if (error) {
                 console.log(error);
-                sess.error=error;                
-                res.redirect('/deals');   
+                sess.error=ErrorMessages.deleteDealError;                
+                res.redirect(siteUrls.sellerDeals);   
               }else{
                     sess.error=''; 
-                    sess.message="Deal successfully deleted.";                
-                    res.redirect('/deals');                              
+                    sess.message=ErrorMessages.deleteDealSuccess;                
+                    res.redirect(siteUrls.sellerDeals);                              
                 }            
             });
          
     }
     else
         {
-            res.redirect('/login');
+            res.redirect(siteUrls.login);
         }
 }
