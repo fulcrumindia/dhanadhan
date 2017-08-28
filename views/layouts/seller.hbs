@@ -56,14 +56,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             <p>Logout</p>
                         </a>
                     </li>
-                    <li class="active">
+                    <li {{#if adddeal}} class="active" {{/if}}{{#if updatedeal}} class="active" {{/if}}>
                         <a href="/seller/deals">
                             <i class="material-icons">deals</i>
                             <p>Deals</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="user.html">
+                    <li {{#if addproduct}} class="active" {{/if}}{{#if updateproduct}} class="active" {{/if}}>
+                        <a href="/seller/products">
                             <i class="material-icons">products</i>
                             <p>Products</p>
                         </a>

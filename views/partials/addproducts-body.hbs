@@ -1,0 +1,56 @@
+<div class="{{containerClass}}">       
+    <div class="{{inputClass}} data-toggle="wizard-checkbox">
+    <label class="control-label">{{{label}}}</label>
+    {{#switch type}}
+        {{#case "textarea"}}
+            <textarea class="form-control" {{#if required}} required="{{required}}" {{/if}} placeholder="" rows="{{rows}}" id="{{name}}" name="{{name}}">{{#if @root.frmdata}}{{lookup @root.frmdata name}}{{/if}}</textarea>
+        {{/case}}
+        {{#case "text" "file" "email" "url"}}
+            <input type="{{type}}" id="{{name}}" {{#if minlength}} minlength="{{minlength}}" {{/if}}  {{#if maxlength}} maxlength="{{maxlength}}" {{/if}} {{#if required}} required="{{required}}" {{/if}} name="{{name}}" class="form-control"
+            {{#if @root.frmdata}} value="{{lookup @root.frmdata name}}" {{/if}}>
+            {{#if @root.flasherror}}
+                {{#each @root.flasherror}}                            
+                    {{#equal param ../name msg}}                        
+                    {{/equal}}
+                {{/each}}
+            {{/if}}
+        {{/case}}
+        {{#case "checkbox"}}
+            <input type="{{type}}" id="{{name}}"  name="{{name}}" class="form-control"
+            {{#if @root.frmdata}} value="{{lookup @root.frmdata name}}" {{#checkbox @root.frmdata name}}{{/checkbox}} {{/if}}>
+            {{#if @root.flasherror}}
+                {{#each @root.flasherror}}                            
+                    {{#equal param ../name msg}}
+                        
+                    {{/equal}}
+                {{/each}}
+            {{/if}}
+        {{/case}}
+        {{#case "number"}}
+            <input type="{{type}}" id="{{name}}" {{#if minlength}} minlength="{{minlength}}" {{/if}} {{#if min}} min="{{min}}" {{/if}}  {{#if maxlength}} maxlength="{{maxlength}}" {{/if}} {{#if required}} required="{{required}}" {{/if}} name="{{name}}" class="form-control"
+            {{#if @root.frmdata}} value="{{lookup @root.frmdata name}}" {{else}}  value="{{defaultValue}}" {{/if}}>
+            {{#if @root.flasherror}}
+                {{#each @root.flasherror}}                            
+                    {{#equal param ../name msg}}
+                        
+                    {{/equal}}
+                {{/each}}
+            {{/if}}
+        {{/case}}
+        {{#case "select"}}
+            <select id="{{name}}" name="{{name}}" class="form-control">
+                {{#if src}}
+                    {{#each  (lookup @root src)}}                        
+                        <option value="{{name}}" {{#if @root.frmdata}}{{#selectedoption @root.frmdata ../name name}}{{/selectedoption}}{{/if}}>{{name}}</option>            
+                    {{/each}}
+                {{else}}
+                    {{#each options}}
+                        <option value="{{value}}" {{#if @root.frmdata}}{{#selectedoption @root.frmdata ../name value}}{{/selectedoption}} {{else}} {{#if default}} selected="selected" {{/if}}{{/if}}>{{value}}</option>
+                    {{/each}}
+                {{/if}}                
+            </select>
+        {{/case}}
+    {{/switch}}            
+    <h6>{{addInfo}}</h6>
+    </div>
+    </div>

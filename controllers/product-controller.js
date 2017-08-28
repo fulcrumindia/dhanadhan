@@ -2,7 +2,7 @@ var connection = require('./../config');
 const session = require('express-session');
 var sess;
 const labels = require('./../data/labels.json');
-const adddeals = require('./../data/dealsform.json');
+const addproducts = require('./../data/productform.json');
 const categories = require('./../data/categories.json');
 const siteUrls = require('./../data/siteUrls.json');
 const ErrorMessages = require('./../data/errorMessages.json');
@@ -26,49 +26,48 @@ Sample Request :
     "main":0
 }
 */
-module.exports.createDeal=function(req,res){    
+module.exports.createProduct=function(req,res){    
     sess=req.session;
     if(sess.token && sess.userRole==2){
          var today = new Date();
-            var deals={
-                "dealLink":req.body.dealLink,
-                "dealCategory":req.body.dealCategory,
-                "dealSubcategory":req.body.dealSubcategory,
-                //"dealStore":req.body.dealStore,
-                "dealStoreaddress":req.body.dealStoreAddress,
-                "dealCity":req.body.dealCity,
-                "dealState":req.body.dealState,
-                "dealOffer":req.body.dealOffer,
-                "dealInstructions":req.body.dealInstructions,
-                "dealDisclaimer":req.body.dealDisclaimer,
-                "dealColor":req.body.dealColor,
-                "dealCreatedBy":sess.userId,
-                "dealCreatedDate":today                
+            var products={
+                "productName":req.body.productName,
+                "productCategory":req.body.productCategory,
+                "productSubcategory":req.body.productSubcategory,
+                //"productStore":req.body.productStore,
+                "productSku":req.body.productSku,
+                "productPrice":req.body.productPrice,
+                "productSellingPrice":req.body.productSellingPrice,
+                "productSalePrice":req.body.productSalePrice,
+                "productDescription":req.body.productDescription,                
+                "productCreatedBy":sess.userId                             
             };
 
-            if(typeof req.body.dealMain==undefined || req.body.dealMain==undefined || req.body.dealMain==null || req.body.dealMain=="undefined")
+            if(typeof req.body.productMain==undefined || req.body.productMain==undefined || req.body.productMain==null || req.body.productMain=="undefined")
                 {
-                    deals.dealMain=0;
+                    products.productMain=0;
                 }
             else
-                deals.dealMain=1;
+                products.productMain=1;
 
-            if(typeof req.body.dealDisplay==undefined || req.body.dealDisplay==undefined || req.body.dealDisplay==null || req.body.dealDisplay=="undefined")
+            if(typeof req.body.productDisplay==undefined || req.body.productDisplay==undefined || req.body.productDisplay==null || req.body.productDisplay=="undefined")
                 {
-                    deals.dealDisplay=0;
+                    products.productDisplay=0;
                 }
             else
-                deals.dealDisplay=1;
+                products.productDisplay=1;
 
-            connection.query('INSERT INTO deals SET ?',deals, function (error, results, fields) {
+            connection.query('INSERT INTO products SET ?',products, function (error, results, fields) {
               if (error) {
-                sess.error=ErrorMessages.addDealError;                
-                sess.formData=deals;            
-                res.redirect(siteUrls.sellerAddDeal);   
+                console.log("Product add error : ");
+                console.log(error);
+                sess.error=ErrorMessages.addProductError;                
+                sess.formData=products;            
+                res.redirect(siteUrls.sellerAddProduct);   
               }else{
                     sess.error=''; 
-                    sess.message=ErrorMessages.addDealSuccess;                
-                    res.redirect(siteUrls.sellerDeals);                               
+                    sess.message=ErrorMessages.addProductSuccess;                
+                    res.redirect(siteUrls.sellerProducts);                               
                 }            
             });
          
@@ -79,16 +78,16 @@ module.exports.createDeal=function(req,res){
         }
 }
 
-module.exports.dealsList=function(req,res){    
+module.exports.productsList=function(req,res){    
     sess=req.session;
     
     if(sess.token && sess.userRole==2){
-         connection.query('SELECT * FROM deals WHERE dealCreatedBy = ?',[sess.userId], function (error, results, fields) {
+         connection.query('SELECT * FROM products WHERE productCreatedBy = ?',[sess.userId], function (error, results, fields) {
           if (error) {
-              res.render('./deals',{error:error,newdealpagelink:siteUrls.sellerAddDeal,updatedeal:siteUrls.sellerUpdateDeal,title:'Deals',flasherror:sess.error,flashmessage:sess.message});
+              res.render('./products',{error:error,layout:'seller',newproductpagelink:siteUrls.sellerAddProduct,updateproduct:siteUrls.sellerUpdateProduct,title:'Products',flasherror:sess.error,flashmessage:sess.message});
           }else{
             console.log(results);
-            res.render('./deals',{results:results,layout:'seller',label:labels,newdealpagelink:siteUrls.sellerAddDeal,updatedeal:siteUrls.sellerUpdateDeal,title:'Deals',flasherror:sess.error,flashmessage:sess.message});
+            res.render('./products',{results:results,layout:'seller',label:labels,newproductpagelink:siteUrls.sellerAddProduct,updateproduct:siteUrls.sellerUpdateProduct,title:'Products',flasherror:sess.error,flashmessage:sess.message});
             
           }
         });
@@ -101,28 +100,28 @@ module.exports.dealsList=function(req,res){
         }
 }
 
-module.exports.updatedeal=function (req,res){
+module.exports.updateproduct=function (req,res){
     sess=req.session;
     if(sess.token && sess.userRole==2){
 
-        connection.query('SELECT * FROM deals WHERE dealId= ? AND dealCreatedBy= ?',[req.query.dealid,sess.userId], function (error, results, fields) {
+        connection.query('SELECT * FROM products WHERE productId= ? AND productCreatedBy= ?',[req.query.productid,sess.userId], function (error, results, fields) {
               if (error) {
                 sess.error=error;                
                 sess.formData=results;            
-                res.redirect(siteUrls.sellerDeals);   
+                res.redirect(siteUrls.sellerProducts);   
               }else{
                 if (!results.length) {
                     sess.error='';                
                     sess.formData='';            
-                    res.redirect(siteUrls.sellerDeals);   
+                    res.redirect(siteUrls.sellerProducts);   
                   }
                   else{
                     sess.formData=results[0];  
-                    adddeals.header="Update Deal";
+                    addproducts.header="Update Product";
                     var view = {
-                    wizarddata: adddeals,
+                    wizarddata: addproducts,
                     categories: categories,
-                    adddeal:siteUrls.sellerUpdateDeal,
+                    addproduct:siteUrls.sellerUpdateProduct,
                     frmdata:sess.formData,
                     flasherror:sess.error,
                     flashmessage:sess.message,
@@ -201,7 +200,7 @@ module.exports.updatedeal=function (req,res){
                 sess.error='';
                 sess.message='';
                 sess.formData='';
-                res.render('adddeal',view);                           
+                res.render('addproduct',view);                           
                 }      
                 }      
             });
@@ -210,54 +209,51 @@ module.exports.updatedeal=function (req,res){
     }
     else
     {
-        res.redirect(siteUrls.sellerDeals);
+        res.redirect(siteUrls.sellerProducts);
     }
 }
 
-module.exports.updateDealData=function(req,res){    
+module.exports.updateProductData=function(req,res){    
     sess=req.session;
     if(sess.token && sess.userRole==2){
          var today = new Date();
-            var deals={
-                "dealLink":req.body.dealLink,
-                "dealCategory":req.body.dealCategory,
-                "dealSubcategory":req.body.dealSubcategory,
-                //"dealStore":req.body.dealStore,
-                "dealStoreaddress":req.body.dealStoreAddress,
-                "dealCity":req.body.dealCity,
-                "dealState":req.body.dealState,
-                "dealOffer":req.body.dealOffer,
-                "dealInstructions":req.body.dealInstructions,
-                "dealColor":req.body.dealColor,
-                "dealCreatedDate":today,
-                "dealDisclaimer":req.body.dealDisclaimer
+            var products={
+                "productName":req.body.productName,
+                "productCategory":req.body.productCategory,
+                "productSubcategory":req.body.productSubcategory,
+                //"productStore":req.body.productStore,
+                "productSku":req.body.productSku,
+                "productPrice":req.body.productPrice,
+                "productSellingPrice":req.body.productSellingPrice,
+                "productSalePrice":req.body.productSalePrice,
+                "productDescription":req.body.productDescription
                                 
             };
 
-            if(typeof req.body.dealMain==undefined || req.body.dealMain==undefined || req.body.dealMain==null || req.body.dealMain=="undefined")
+            if(typeof req.body.productMain==undefined || req.body.productMain==undefined || req.body.productMain==null || req.body.productMain=="undefined")
                 {
-                    deals.dealMain=0;
+                    products.productMain=0;
                 }
             else
-                deals.dealMain=1;
+                products.productMain=1;
 
-            if(typeof req.body.dealDisplay==undefined || req.body.dealDisplay==undefined || req.body.dealDisplay==null || req.body.dealDisplay=="undefined")
+            if(typeof req.body.productDisplay==undefined || req.body.productDisplay==undefined || req.body.productDisplay==null || req.body.productDisplay=="undefined")
                 {
-                    deals.dealDisplay=0;
+                    products.productDisplay=0;
                 }
             else
-                deals.dealDisplay=1;
+                products.productDisplay=1;
 
-            connection.query('UPDATE deals SET ? WHERE dealId='+req.body.dealId+' AND dealCreatedBy='+sess.userId,[deals], function (error, results, fields) {
+            connection.query('UPDATE products SET ? WHERE productId='+req.body.productId+' AND productCreatedBy='+sess.userId,[products], function (error, results, fields) {
               if (error) {
                 console.log(error);
-                sess.error=ErrorMessages.updateDealError;                
+                sess.error=ErrorMessages.updateProductError;                
                 sess.formData=results;            
-                res.redirect(siteUrls.sellerDeals);   
+                res.redirect(siteUrls.sellerProducts);   
               }else{
                     sess.error=''; 
-                    sess.message="ErrorMessages.updateDealSuccess";                
-                    res.redirect(siteUrls.sellerDeals);                              
+                    sess.message="ErrorMessages.updateProductSuccess";                
+                    res.redirect(siteUrls.sellerProducts);                              
                 }            
             });
          
@@ -269,19 +265,19 @@ module.exports.updateDealData=function(req,res){
 }
 
 
-module.exports.deletedeal=function(req,res){    
+module.exports.deleteproduct=function(req,res){    
     sess=req.session;
     if(sess.token && sess.userRole==2){        
            
-            connection.query('DELETE FROM deals WHERE dealId='+req.query.dealid+' AND dealCreatedBy='+sess.userId,[], function (error, results, fields) {
+            connection.query('DELETE FROM products WHERE productId='+req.query.productid+' AND productCreatedBy='+sess.userId,[], function (error, results, fields) {
               if (error) {
                 console.log(error);
-                sess.error=ErrorMessages.deleteDealError;                
-                res.redirect(siteUrls.sellerDeals);   
+                sess.error=ErrorMessages.deleteProductError;                
+                res.redirect(siteUrls.sellerProducts);   
               }else{
                     sess.error=''; 
-                    sess.message=ErrorMessages.deleteDealSuccess;                
-                    res.redirect(siteUrls.sellerDeals);                              
+                    sess.message=ErrorMessages.deleteProductSuccess;                
+                    res.redirect(siteUrls.sellerProducts);                              
                 }            
             });
          

@@ -1,0 +1,35 @@
+<!--   Big container   -->
+
+    <div class="col-md-12">
+        <div class="col-sm-12">
+            <!--      Wizard container        -->
+            <div class="wizard-container">
+                <h3 class="w3ls-title w3ls-title1">{{wizarddata.header}}</h3>
+                <h6 class="text-success">{{flashmessage}}</h6><h6 class="text-danger">{{flasherror}}</h6>
+                <div class="card wizard-card" data-color="{{wizarddata.color}}" id="wizardProfile">
+                    <form action="{{addproduct}}" method="post">
+                        <div class="tab-pane" id="{{href}}">
+                            <div class="col-md-12">
+                                <h6 class="text-danger"></h6>
+                                {{#if wizarddata.fields}}
+                                    {{#each wizarddata.fields}}
+                                        {{>addproducts-body}}
+                                    {{/each}}
+                                {{/if}}
+                            </div>
+                        </div>  
+                        {{#if frmdata.productId}}<input type="hidden" name="productId" value="{{frmdata.productId}}"/> {{/if}}                       
+                        <div class="col-md-12">
+                            <div class="pull-right">
+                                <input type='submit' class='btn btn-finish btn-fill btn-success btn-wd' name='addproduct' value='{{wizarddata.header}}' />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- wizard container -->
+        </div>
+    </div>
+    <!-- end row -->
+
+<!--  big container -->

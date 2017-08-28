@@ -1,0 +1,129 @@
+{
+    "name": "add product",
+    "header": "Add Product",
+    "title": "Add product",
+    "description": "This information will let us know more about you." ,
+    "color": "purple",
+     "fields": [
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Categroy",
+                    "type": "select",
+                    "src": "categories",
+                    "id": "productCategory",
+                    "name": "productCategory",
+                    "showicons": true,
+                    "required":true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Sub Categroy",
+                    "type": "text",
+                    "id": "productSubcategory",
+                    "name": "productSubcategory",
+                    "minlength":2,
+                    "maxlength":50
+                },                
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Name",
+                    "type": "text",
+                    "id": "productName",
+                    "name": "productName",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":100,
+                    "required":true
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "SKU",
+                    "type": "text", 
+                    "id": "productSku",
+                    "name": "productSku",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
+                },                
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "MRP",
+                    "type": "number", 
+                    "id": "productPrice",
+                    "name": "productPrice",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":200
+                    
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Sellig Price",
+                    "type": "number", 
+                    "id": "productSellingPrice",
+                    "name": "productSellingPrice",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":200
+                },
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Sale Price",
+                    "type": "number", 
+                    "id": "productSalePrice",
+                    "name": "productSalePrice",
+                    "showicons": true,
+                    "minlength":2,
+                    "maxlength":50
+                },
+                {
+
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Display",
+                    "type": "checkbox",
+                    "id": "productDisplay",
+                    "name": "productDisplay",
+                    "showicons": true                
+                },
+                {
+
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6",
+                    "inputClass": "form-group label-floating",
+                    "label": "Main",
+                    "type": "checkbox",
+                    "id": "productMain",
+                    "name": "productMain",
+                    "showicons": true
+                },                
+                {
+                    "layoutClass": "col-sm-12",
+                    "containerClass": "col-sm-12",
+                    "inputClass": "form-group label-floating",
+                    "label": "Description",
+                    "type": "textarea","rows":5,
+                    "id": "productDescription",
+                    "name": "productDescription",
+                    "showicons": true
+                }
+                
+            ]        
+}

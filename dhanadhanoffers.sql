@@ -79,3 +79,20 @@ CREATE TABLE `users` (
   `agreeTerms` text NOT NULL,
   `name` varchar(60) NOT NULL
 ) ENGINE=InnoDB ;
+
+
+CREATE TABLE `products` (
+  `productId` int(11) NOT NULL,
+  `productCategory` varchar(50) NOT NULL,
+  `productSubcategory` varchar(50) NOT NULL,
+  `productName` varchar(500) NOT NULL,
+  `productSku` varchar(50) NOT NULL,
+  `productPrice` decimal(10,2) NOT NULL,
+  `productSellingPrice` decimal(10,2) NOT NULL,
+  `productSalePrice` decimal(10,2) NOT NULL,
+  `productDisplay` tinyint(4) NOT NULL,
+  `productMain` tinyint(4) NOT NULL,
+  `productCreatedBy` int(11) NOT NULL,
+  `productImage` varchar(50) NOT NULL,
+  `productDescription` text NOT NULL
+) ENGINE=InnoDB

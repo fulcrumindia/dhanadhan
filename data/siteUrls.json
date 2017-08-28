@@ -6,6 +6,10 @@
 	"login":"/login",
 	"signup":"/signup",
 	"deleteDeal":"/deletedeal",
+	"sellerProducts":"/seller/products",
+	"sellerAddProduct":"/seller/addproduct",
+	"sellerUpdateProduct":"/seller/updateproduct",
+	"deleteProduct":"/deleteproduct",
 	"logout":"/logout",
 	"contact":"/contact"
 }
