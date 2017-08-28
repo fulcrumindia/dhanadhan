@@ -189,3 +189,10 @@ function showdeletepopup(obj){
          // it is superfluous to have to manually call the modal.
          // $('#addBookDialog').modal('show');
     }
+function showdeletepopupproduct(obj){
+         var productId = $(obj).data('id');
+         $("#deleteproduct").prop('href','/deleteproduct?productid='+ productId );
+         // As pointed out in comments, 
+         // it is superfluous to have to manually call the modal.
+         // $('#addBookDialog').modal('show');
+    }
