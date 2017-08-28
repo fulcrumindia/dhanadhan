@@ -119,6 +119,8 @@ jQuery(document).ready(function($){
 			jQuery('#businessNoOfLocations').val(0).parent().hide();
 	});
 
+	
+
 	function toggleNav(){
 		var navIsVisible = ( !$('.cd-dropdown').hasClass('dropdown-is-active') ) ? true : false;
 		$('.cd-dropdown').toggleClass('dropdown-is-active', navIsVisible);
