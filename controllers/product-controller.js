@@ -12,6 +12,8 @@ var fs = require('fs');
 var http = require('http');
 var multiparty = require('multiparty');
 var randtoken = require('rand-token');
+var uploadPath = path.join(__dirname,'./../images/');
+console.log(uploadPath);
 /*
 Sample Request :
 {
@@ -65,7 +67,7 @@ module.exports.createProduct=function(req,res){
             if(files.productImage[0].size>0){
                 var file_to_save='image_'+ randtoken.generate(16) + new Date().getFullYear() + '___profile.' + files.productImage[0].originalFilename;
                 var oldpath = files.productImage[0].path;
-                var newpath = 'C:/Users/user/Desktop/productimages/'+file_to_save;
+                var newpath = uploadPath+file_to_save;
                 if (path.extname(files.productImage[0].path).toLowerCase() === '.png' || path.extname(files.productImage[0].path).toLowerCase() === '.jpg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpeg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.gif') {
                     fs.rename(oldpath, newpath, function(err) {
                         console.log("entered2");
@@ -299,7 +301,7 @@ module.exports.updateProductData=function(req,res){
              if(files.productImage[0].size>0){
                 var file_to_save='image_'+ randtoken.generate(16) + new Date().getFullYear() + '___profile.' + files.productImage[0].originalFilename;
                 var oldpath = files.productImage[0].path;
-                var newpath = 'C:/Users/user/Desktop/productimages/'+file_to_save;
+                var newpath = uploadPath+file_to_save;
                 if (path.extname(files.productImage[0].path).toLowerCase() === '.png' || path.extname(files.productImage[0].path).toLowerCase() === '.jpg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpeg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.gif') {
                     fs.rename(oldpath, newpath, function(err) {
                         console.log("entered2");
