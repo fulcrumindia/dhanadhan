@@ -91,9 +91,10 @@ module.exports.dealsList=function(req,res){
             res.render('./deals',{results:results,layout:'seller',label:labels,newdealpagelink:siteUrls.sellerAddDeal,updatedeal:siteUrls.sellerUpdateDeal,title:'Deals',flasherror:sess.error,flashmessage:sess.message});
             
           }
-        });
-         sess.error='';
+          sess.error='';
             sess.message='';
+        });
+         
     }
     else
         {

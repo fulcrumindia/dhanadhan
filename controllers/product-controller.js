@@ -136,13 +136,14 @@ module.exports.productsList=function(req,res){
           if (error) {
               res.render('./products',{error:error,layout:'seller',newproductpagelink:siteUrls.sellerAddProduct,updateproduct:siteUrls.sellerUpdateProduct,title:'Products',flasherror:sess.error,flashmessage:sess.message});
           }else{
-            console.log(results);
+            console.log(sess);
             res.render('./products',{results:results,layout:'seller',label:labels,newproductpagelink:siteUrls.sellerAddProduct,updateproduct:siteUrls.sellerUpdateProduct,title:'Products',flasherror:sess.error,flashmessage:sess.message});
             
           }
-        });
-         sess.error='';
+          sess.error='';
             sess.message='';
+        });
+        
     }
     else
         {
