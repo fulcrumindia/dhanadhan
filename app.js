@@ -5,6 +5,10 @@ const cors = require('cors');
 const path = require('path');
 const hbs = require('express-handlebars');
 var fs = require('fs');
+if (!fs.existsSync('images')){
+    fs.mkdirSync('images');
+}
+
 const app = express();
 const port = process.env.port || 3000;
 const session = require('express-session');
