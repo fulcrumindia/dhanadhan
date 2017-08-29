@@ -82,7 +82,7 @@ CREATE TABLE `users` (
 
 
 CREATE TABLE `products` (
-  `productId` int(11) NOT NULL,
+  `productId` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `productCategory` varchar(50) NOT NULL,
   `productSubcategory` varchar(50) NOT NULL,
   `productName` varchar(500) NOT NULL,
