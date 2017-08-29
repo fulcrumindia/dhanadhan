@@ -6,9 +6,12 @@ const addproducts = require('./../data/productform.json');
 const categories = require('./../data/categories.json');
 const siteUrls = require('./../data/siteUrls.json');
 const ErrorMessages = require('./../data/errorMessages.json');
-
+const path = require('path');
 var check = require('validator').check,sanitize = require('validator').sanitize;
+var fs = require('fs');
+var http = require('http');
 var multiparty = require('multiparty');
+var randtoken = require('rand-token');
 /*
 Sample Request :
 {
@@ -29,17 +32,18 @@ Sample Request :
 module.exports.createProduct=function(req,res){    
     sess=req.session;
     if(sess.token && sess.userRole==2){
+        (new multiparty.Form()).parse(req, function (err, fields, files) {     
+           req.body=fields;
          var today = new Date();
             var products={
-                "productName":req.body.productName,
-                "productCategory":req.body.productCategory,
-                "productSubcategory":req.body.productSubcategory,
-                "productImage":"",
-                "productSku":req.body.productSku,
+                "productName":req.body.productName[0],
+                "productCategory":req.body.productCategory[0],
+                "productSubcategory":req.body.productSubcategory[0],
+                "productSku":req.body.productSku[0],
                 "productPrice":req.body.productPrice,
-                "productSellingPrice":req.body.productSellingPrice,
-                "productSalePrice":req.body.productSalePrice,
-                "productDescription":req.body.productDescription,                
+                "productSellingPrice":req.body.productSellingPrice[0],
+                "productSalePrice":req.body.productSalePrice[0],
+                "productDescription":req.body.productDescription[0],                
                 "productCreatedBy":sess.userId                             
             };
 
@@ -57,20 +61,66 @@ module.exports.createProduct=function(req,res){
             else
                 products.productDisplay=1;
 
-            connection.query('INSERT INTO products SET ?',products, function (error, results, fields) {
-              if (error) {
-                console.log("Product add error : ");
-                console.log(error);
-                sess.error=ErrorMessages.addProductError;                
-                sess.formData=products;            
-                res.redirect(siteUrls.sellerAddProduct);   
-              }else{
-                    sess.error=''; 
-                    sess.message=ErrorMessages.addProductSuccess;                
-                    res.redirect(siteUrls.sellerProducts);                               
-                }            
-            });
-         
+            products.productImage=''; 
+            if(files.productImage[0].size>0){
+                var file_to_save='image_'+ randtoken.generate(16) + new Date().getFullYear() + '___profile.' + files.productImage[0].originalFilename;
+                var oldpath = files.productImage[0].path;
+                var newpath = 'C:/Users/user/Desktop/productimages/'+file_to_save;
+                if (path.extname(files.productImage[0].path).toLowerCase() === '.png' || path.extname(files.productImage[0].path).toLowerCase() === '.jpg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpeg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.gif') {
+                    fs.rename(oldpath, newpath, function(err) {
+                        console.log("entered2");
+                        if (err) {
+                            product.productImage=oldpath;
+                            console.log(err);
+                            sess.error=ErrorMessages.imageUploadingError;                            
+                            sess.formData=products;            
+                            res.redirect(siteUrls.sellerAddProduct);
+                        }
+                        else{
+                            console.log("entered3");
+                            products.productImage=file_to_save;  
+                             connection.query('INSERT INTO products SET ?',products, function (error, results, fields) {
+                              if (error) {
+                                console.log("Product add error : ");
+                                console.log(error);
+                                sess.error=ErrorMessages.addProductError;                
+                                sess.formData=products;            
+                                res.redirect(siteUrls.sellerAddProduct);   
+                              }else{
+                                    sess.error=''; 
+                                    sess.message=ErrorMessages.addProductSuccess;                
+                                    res.redirect(siteUrls.sellerProducts);                               
+                                }            
+                            });                          
+                            }    
+                    });
+                } else {
+                    fs.unlink(newpath, function () {
+                            sess.error=ErrorMessages.imageExtError;                            
+                            sess.formData=products;          
+                            res.redirect(siteUrls.listbusiness);   
+                        
+                    });
+                }     
+            }
+            else{
+            
+                connection.query('INSERT INTO products SET ?',products, function (error, results, fields) {
+                  if (error) {
+                    console.log("Product add error : ");
+                    console.log(error);
+                    sess.error=ErrorMessages.addProductError;                
+                    sess.formData=products;            
+                    res.redirect(siteUrls.sellerAddProduct);   
+                  }else{
+                        sess.error=''; 
+                        sess.message=ErrorMessages.addProductSuccess;                
+                        res.redirect(siteUrls.sellerProducts);                               
+                    }            
+                });
+            }
+        
+        });
     }
     else
         {
@@ -216,18 +266,19 @@ module.exports.updateproduct=function (req,res){
 module.exports.updateProductData=function(req,res){    
     sess=req.session;
     if(sess.token && sess.userRole==2){
+        (new multiparty.Form()).parse(req, function (err, fields, files) {   
+         req.body=fields;  
          var today = new Date();
             var products={
-                "productName":req.body.productName,
-                "productCategory":req.body.productCategory,
-                "productSubcategory":req.body.productSubcategory,
-                "productImage":"",
-                "productSku":req.body.productSku,
+                "productName":req.body.productName[0],
+                "productCategory":req.body.productCategory[0],
+                "productSubcategory":req.body.productSubcategory[0],
+                "productSku":req.body.productSku[0],
                 "productPrice":req.body.productPrice,
-                "productSellingPrice":req.body.productSellingPrice,
-                "productSalePrice":req.body.productSalePrice,
-                "productDescription":req.body.productDescription
-                                
+                "productSellingPrice":req.body.productSellingPrice[0],
+                "productSalePrice":req.body.productSalePrice[0],
+                "productDescription":req.body.productDescription[0],                
+                               
             };
 
             if(typeof req.body.productMain==undefined || req.body.productMain==undefined || req.body.productMain==null || req.body.productMain=="undefined")
@@ -244,19 +295,65 @@ module.exports.updateProductData=function(req,res){
             else
                 products.productDisplay=1;
 
-            connection.query('UPDATE products SET ? WHERE productId='+req.body.productId+' AND productCreatedBy='+sess.userId,[products], function (error, results, fields) {
-              if (error) {
-                console.log(error);
-                sess.error=ErrorMessages.updateProductError;                
-                sess.formData=results;            
-                res.redirect(siteUrls.sellerProducts);   
-              }else{
-                    sess.error=''; 
-                    sess.message="ErrorMessages.updateProductSuccess";                
-                    res.redirect(siteUrls.sellerProducts);                              
-                }            
-            });
-         
+             if(files.productImage[0].size>0){
+                var file_to_save='image_'+ randtoken.generate(16) + new Date().getFullYear() + '___profile.' + files.productImage[0].originalFilename;
+                var oldpath = files.productImage[0].path;
+                var newpath = 'C:/Users/user/Desktop/productimages/'+file_to_save;
+                if (path.extname(files.productImage[0].path).toLowerCase() === '.png' || path.extname(files.productImage[0].path).toLowerCase() === '.jpg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.jpeg' || path.extname(files.businessLogo[0].path).toLowerCase() === '.gif') {
+                    fs.rename(oldpath, newpath, function(err) {
+                        console.log("entered2");
+                        if (err) {
+                            product.productImage=oldpath;
+                            console.log(err);
+                            sess.error=ErrorMessages.imageUploadingError;                            
+                            sess.formData=products;            
+                            res.redirect(siteUrls.sellerAddProduct);
+                        }
+                        else{
+                            console.log("--------------------------297-----------------------------------------");
+            
+                                console.log("entered3");
+                                console.log(file_to_save);
+                                products.productImage=file_to_save;            
+                                connection.query('UPDATE products SET ? WHERE productId='+req.body.productId+' AND productCreatedBy='+sess.userId,[products], function (error, results, fields) {
+                                  if (error) {
+                                    console.log(error);
+                                    sess.error=ErrorMessages.updateProductError;                
+                                    sess.formData=results;            
+                                    res.redirect(siteUrls.sellerUpdateProduct);   
+                                  }else{
+                                        sess.error=''; 
+                                        sess.message=ErrorMessages.updateProductSuccess;                
+                                        res.redirect(siteUrls.sellerProducts);                              
+                                    }            
+                                });               
+                            }    
+                    });
+                } else {
+                    fs.unlink(newpath, function () {
+                            sess.error=ErrorMessages.imageExtError;                            
+                            sess.formData=products;          
+                            res.redirect(siteUrls.listbusiness);   
+                        
+                    });
+                }     
+            }            
+            else
+                {
+                    connection.query('UPDATE products SET ? WHERE productId='+req.body.productId+' AND productCreatedBy='+sess.userId,[products], function (error, results, fields) {
+                      if (error) {
+                        console.log(error);
+                        sess.error=ErrorMessages.updateProductError;                
+                        sess.formData=results;            
+                        res.redirect(siteUrls.sellerUpdateProduct);   
+                      }else{
+                            sess.error=''; 
+                            sess.message=ErrorMessages.updateProductSuccess;                
+                            res.redirect(siteUrls.sellerProducts);                              
+                        }            
+                    });
+                }
+        }); 
     }
     else
         {

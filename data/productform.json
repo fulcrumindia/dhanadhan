@@ -42,6 +42,17 @@
                     "minlength":2,
                     "maxlength":100,
                     "required":true
+                },                
+                {
+                    "layoutClass": "col-sm-6",
+                    "containerClass": "col-sm-6 picture-container",
+                    "inputClass": "picture",
+                    "label": "Image",
+                    "type": "file",
+                    "id": "productImage",
+                    "name": "productImage",
+                    "showicons": true
+                    
                 },
                 {
                     "layoutClass": "col-sm-6",
