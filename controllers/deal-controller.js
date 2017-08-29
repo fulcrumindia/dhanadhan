@@ -257,7 +257,7 @@ module.exports.updateDealData=function(req,res){
                 res.redirect(siteUrls.sellerDeals);   
               }else{
                     sess.error=''; 
-                    sess.message="ErrorMessages.updateDealSuccess";                
+                    sess.message=ErrorMessages.updateDealSuccess;                
                     res.redirect(siteUrls.sellerDeals);                              
                 }            
             });
