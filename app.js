@@ -10,7 +10,7 @@ if (!fs.existsSync('images')){
 }
 
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.port || 8081;
 const session = require('express-session');
 const expressValidator = require('express-validator');
 // custom config
