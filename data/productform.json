@@ -9,7 +9,7 @@
                     "layoutClass": "col-sm-6",
                     "containerClass": "col-sm-6",
                     "inputClass": "form-group label-floating",
-                    "label": "Categroy",
+                    "label": "Categroy *",
                     "type": "select",
                     "src": "categories",
                     "id": "productCategory",
