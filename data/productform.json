@@ -42,17 +42,6 @@
                     "minlength":2,
                     "maxlength":100,
                     "required":true
-                },                
-                {
-                    "layoutClass": "col-sm-6",
-                    "containerClass": "col-sm-6 picture-container",
-                    "inputClass": "picture",
-                    "label": "Image",
-                    "type": "file",
-                    "id": "productImage",
-                    "name": "productImage",
-                    "showicons": true
-                    
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -65,7 +54,28 @@
                     "showicons": true,
                     "minlength":2,
                     "maxlength":50
-                },                
+                },                      
+                {
+                    "layoutClass": "col-sm-12",
+                    "containerClass": "col-sm-6 picture-container",
+                    "inputClass": "picture",
+                    "label": "Image",
+                    "type": "file",
+                    "id": "productImage",
+                    "name": "productImage",
+                    "showicons": true
+                    
+                },      
+                {
+                    "layoutClass": "col-sm-12",
+                    "containerClass": "col-sm-12",
+                    "inputClass": "form-group label-floating",
+                    "label": "Description",
+                    "type": "textarea","rows":5,
+                    "id": "productDescription",
+                    "name": "productDescription",
+                    "showicons": true
+                },         
                 {
                     "layoutClass": "col-sm-6",
                     "containerClass": "col-sm-6",
@@ -76,7 +86,8 @@
                     "name": "productPrice",
                     "showicons": true,
                     "minlength":2,
-                    "maxlength":200
+                    "maxlength":200,
+                    "required":true
                     
                 },
                 {
@@ -89,7 +100,8 @@
                     "name": "productSellingPrice",
                     "showicons": true,
                     "minlength":2,
-                    "maxlength":200
+                    "maxlength":200,
+                    "required":true
                 },
                 {
                     "layoutClass": "col-sm-6",
@@ -123,16 +135,6 @@
                     "type": "checkbox",
                     "id": "productMain",
                     "name": "productMain",
-                    "showicons": true
-                },                
-                {
-                    "layoutClass": "col-sm-12",
-                    "containerClass": "col-sm-12",
-                    "inputClass": "form-group label-floating",
-                    "label": "Description",
-                    "type": "textarea","rows":5,
-                    "id": "productDescription",
-                    "name": "productDescription",
                     "showicons": true
                 }
                 
